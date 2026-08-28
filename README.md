@@ -57,6 +57,7 @@ New readers should begin with:
 5. [`transport/MILESTONE_T1_T9.md`](transport/MILESTONE_T1_T9.md) — exact nine-test transport frontier.
 6. [`transport/t10/MILESTONE_T10_001_CONTAMINATION.md`](transport/t10/MILESTONE_T10_001_CONTAMINATION.md) — why the first blind invention pilot does not count.
 7. [`transport/10B_LEVEL3_PROTOCOL_V2_HYPOTHESIS_SPACE_ISOLATION.md`](transport/10B_LEVEL3_PROTOCOL_V2_HYPOTHESIS_SPACE_ISOLATION.md) — current Level-3 protocol.
+8. [`frontier/README.md`](frontier/README.md) — OPEN research questions generated downstream of the frozen evidence; precision here is not confirmation.
 
 ---
 
@@ -382,6 +383,38 @@ See:
 
 ---
 
+## OPEN frontier after the T10 boundary
+
+The repository now has a separate [`frontier/`](frontier/) layer for **derived questions downstream of frozen evidence**.
+
+Its governing distinction is:
+
+```math
+\boxed{\textbf{derived question}\neq\textbf{frozen evidence}\neq\textbf{experimental result}.}
+```
+
+and its first-class rule is:
+
+```math
+\boxed{\textbf{A frontier artifact may become more precise without becoming more confirmed.}}
+```
+
+The first frontier artifact is [`frontier/00_CORRECTION_LOCAL_EPISTEMIC_COMPOUNDING.md`](frontier/00_CORRECTION_LOCAL_EPISTEMIC_COMPOUNDING.md). It preserves an OPEN question about scope-aware compression, warrant-selective correction, reopening observability, and self-sealing abstraction.
+
+Its status is explicitly:
+
+```math
+\boxed{OPEN(\text{scope/condition-aware, triggerable, warrant-selective epistemic compounding})}
+```
+
+Nothing in `frontier/` modifies AG/1, changes T1–T10 verdicts, creates a T11/T12 result, or becomes evidence merely because it is formally specified.
+
+```math
+\boxed{\text{specified}\neq\text{admitted}\neq\text{executed}\neq\text{validated}.}
+```
+
+---
+
 ## Source and corpus provenance
 
 The source substrate is pinned to:
@@ -423,6 +456,7 @@ docs/         reader orientation + derivation methods
 genesis/      completed Genesis 1–50 structural reading
 abstraction/  relation inventory, minimization, ablations, AG/1 freeze
 transport/    frozen external tests + Level-3 boundary
+frontier/     precisely specified OPEN questions downstream of frozen evidence
 
 decoder/      earlier research scaffolding
 heldout/      earlier heldout workflow artifacts
@@ -456,6 +490,9 @@ AG/1 improves a production AI system.
 AG/1 is a general scientific theory of intelligence or reality.
 Level-3 structural invention has been demonstrated.
 T10.002 is authorized to run.
+Correction-local epistemic compounding has been demonstrated.
+Corrigibility debt or self-sealing abstraction has been empirically established.
+Any frontier benchmark is admitted, executed, or validated.
 ```
 
 The strongest project discipline is therefore:
