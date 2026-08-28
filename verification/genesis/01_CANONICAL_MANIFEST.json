@@ -1,0 +1,12 @@
+{
+  "all_text_kjv_sha256_verified": true,
+  "artifact": "verification/genesis/01_CANONICAL_RECORDS.jsonl",
+  "artifact_sha256": "9704aa8da1f9ffa34dd081717615794e67f64de7e4ceb76cc746758334551d1b",
+  "first_id": "GEN.1.1",
+  "last_id": "GEN.1.31",
+  "purpose": "canonical Genesis 1 substrate slice; no structural interpretation",
+  "schema_version": 1,
+  "source_corpus": "corpus/kjv.jsonl",
+  "source_corpus_sha256": "b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc",
+  "verse_count": 31
+}
