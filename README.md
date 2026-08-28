@@ -1,167 +1,115 @@
 # ML Didacticism
 
-A structural reading project for the King James Bible (KJV) using machine-learning, causal, state-transition, representation, and information-processing language as an analytic lens.
+A structural reading project for the King James Bible (KJV) whose primary goal is simple:
 
-The project is **not** a theological replacement, doctrinal paraphrase, or claim that ancient authors intended modern ML concepts.
+```math
+\boxed{\textbf{make the text legible to modern humans and machines before interpreting it}}
+```
 
-The current experiment is a provenance-bound held-out decoder evaluation:
+The project uses state, action, relation, representation, information, provenance, sequence, consequence, and other machine-friendly structural language as an analytic lens.
+
+It is **not** a theological replacement, doctrinal paraphrase, or claim that biblical authors intended modern ML concepts.
+
+## North star
 
 ```math
 \boxed{
-\text{Genesis 1--2 calibration}
-\rightarrow
-D_1^F
-\rightarrow
-T_{\mathrm{GEN.3}}^F
-\rightarrow
-P_3^F
-\rightarrow
-A_3
+\textbf{Make it legible first. Understand what is there second. Interpret third.}
 }
 ```
 
-where the audit may change confidence in the decoder but may not rewrite the frozen decoder or its held-out output.
-
-## Canonical order
+The working pipeline is:
 
 ```math
 \boxed{
-\text{SOURCE}
+\text{KJV source}
 \rightarrow
-\text{PARSABLE CORPUS}
+\text{plain legible rendering}
 \rightarrow
-\text{STRUCTURAL DECODING}
+\text{structural representation}
 \rightarrow
+\text{repeated patterns}
+\rightarrow
+\text{interpretation}
+}
+```
+
+The structural schema is allowed to evolve as the text demands. Genesis, Proverbs, Job, Isaiah, Matthew, and Revelation do not need to fit one predeclared ontology.
+
+A passage may produce categories such as:
+
+```text
+Plain meaning
+Actors
+Entities
+Properties
+Actions
+Relations
+Sequence
+Consequences
+Repeated patterns
+Uncertainties
+```
+
+and new categories can be introduced when they are genuinely useful for preserving what the passage says.
+
+## Binding constraints
+
+Only a small methodological core is binding.
+
+### 1. Provenance-bound source
+
+The evidence substrate is tied to an exact pinned KJV snapshot rather than the vague label “KJV”.
+
+### 2. Keep the layers separate
+
+```math
+\boxed{
+\text{TEXT}
+\neq
+\text{STRUCTURAL PARSE}
+\neq
 \text{INTERPRETATION}
 }
 ```
 
-The governing evidence invariant is:
+The structural representation is a deliberately lossy aid to legibility. It does not replace the text.
 
-```math
-\boxed{\textbf{downstream revisions never mutate upstream evidence}}
-```
+### 3. Preserve what the text actually gives
 
-The held-out invariant is:
-
-```math
-\boxed{
-A_3\text{ may alter confidence in }D_1
-\quad\neq\quad
-A_3\text{ may alter }D_1\text{ or }P_3
-}
-```
-
-## Experimental status
+Useful structure includes ordinary things such as:
 
 ```text
-source pinned                           ✓
-deterministic extractor implemented   ✓
-source fingerprint verified           ✓
-corpus materialized                   ✓
-ingestion verification                ✓
-Genesis 1 canonical re-derivation     ✓
-Genesis 2 canonical re-derivation     ✓
-D1 frozen before Genesis 3             ✓
-Genesis 3 held-out parse P3 frozen    ✓
-P3 frozen before scoring               ✓
-A3 scoring audit complete              ✓
-D1 modified by A3                      ✗
-P3 modified by A3                      ✗
-D2 proposed inside A3                  ✗
+who said what
+who did what
+what changed
+what was named
+what was evaluated
+what was permitted or prohibited
+what future consequence was stated
+what happened afterward
+what source or reason was attributed
+what relations persisted or changed
 ```
 
-The clean causal sequence is:
+Do not strengthen a weak textual relation into a stronger claim merely because the stronger claim would make a cleaner theory.
 
-```text
-Genesis 1–2
-   ↓
-canonical re-derivation audits
-   ↓
-D1
-   ↓
-FREEZE
-   ↓
-Genesis 3
-   ↓
-P3
-   ↓
-FREEZE
-   ↓
-A3 scoring audit
-   ↓
-belief update about D1
-   ↓
-only afterward: possible successor decoder
-```
-
-## Held-out Genesis 3 result
-
-Frozen D1 was scored on frozen P3 against the predeclared error axes:
-
-```text
-unsupported structural promotion
-missed recoverable structure
-```
-
-using claim/abstention-level classifications:
-
-```text
-SURVIVED
-FALSE PROMOTION
-MISSED STRUCTURE
-CORRECT ABSTENTION
-NEW FAILURE MODE
-```
-
-A3 found:
-
-```text
-FALSE PROMOTION:       1
-MISSED STRUCTURE:      12
-NEW FAILURE MODE:      0
-explicit OPEN items:   49
-correct OPEN items:    49
-```
-
-Therefore:
+### 4. Mark genuine uncertainty instead of filling it
 
 ```math
 \boxed{
-49/49\ \text{explicit OPENs were correct abstentions}
+\text{uncertainty}
+\rightarrow
+\mathrm{OPEN}
+\quad\text{rather than invented structure}
 }
 ```
 
-and:
-
-```math
-\boxed{
-\text{D1 generalized its epistemic boundary; its remaining failure is predominantly structural coverage.}
-}
-```
-
-The observed misses cluster around:
-
-```text
-explicit discourse / connective edges
-predicate detail
-speaker / action attribution
-temporal relations
-cross-verse proposition correspondence
-```
-
-This clustering is a diagnostic result, not a decoder repair.
-
-See:
-
-- [`heldout/genesis/03_A3_SCORING_AUDIT.md`](heldout/genesis/03_A3_SCORING_AUDIT.md)
-- [`heldout/genesis/03_A3_MANIFEST.json`](heldout/genesis/03_A3_MANIFEST.json)
-
-The original [`heldout/genesis/03_P3_MANIFEST.json`](heldout/genesis/03_P3_MANIFEST.json) intentionally remains frozen at its pre-scoring state and therefore still records `scoring_status: NOT_RUN`. The later A3 artifacts record the audit without mutating that historical checkpoint.
+`OPEN` is useful when a distinction matters but the text does not settle it. It is not a requirement to formalize every uncertainty or a substitute for ordinary reading.
 
 ## Source status
 
-Pinned source:
+Pinned upstream source:
 
 ```text
 repository: renniemaharaj/kjv-bible
@@ -175,11 +123,13 @@ Pinned 66-book source-corpus SHA-512:
 7c2eff0219d59c683b1d12739a64facb22807770e05daf20cf1a4d22ef1b739d5ec03268abb8c3201fd69eb1014cc45a37697cb8abaceccd316c2e473db0b264
 ```
 
-“KJV” is not treated as a sufficient source identifier. The immutable git snapshot and fingerprints identify the source bytes; upstream historical/edition labels remain provenance claims rather than authority supplied by this repository.
+The immutable git snapshot and byte fingerprints identify the evidence substrate. Historical/edition labels remain upstream provenance metadata rather than authority generated by this repository.
+
+See [`source/PINNED_SOURCE.json`](source/PINNED_SOURCE.json).
 
 ## Materialized corpus
 
-The canonical machine-readable artifact is [`corpus/kjv.jsonl`](corpus/kjv.jsonl):
+The canonical machine-readable corpus is [`corpus/kjv.jsonl`](corpus/kjv.jsonl):
 
 ```text
 verse records: 31,102
@@ -188,41 +138,56 @@ last ID:       REV.22.21
 SHA-256:       b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc
 ```
 
-The deterministic ingestion result is frozen in [`corpus/MANIFEST.json`](corpus/MANIFEST.json).
+A verse ID is an address, not itself evidence. Each canonical verse record carries source binding back to the pinned upstream snapshot.
 
-## Verse identity
+The deterministic ingestion result is recorded in [`corpus/MANIFEST.json`](corpus/MANIFEST.json).
 
-```math
-\boxed{\text{verse ID} \neq \text{evidence}}
-```
+## Reading path
 
-A verse ID such as `GEN.1.1` is an address.
+The main project path is now the chapter-by-chapter structural reading itself:
 
-A canonical verse record is bound to evidence by:
+- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — world construction, distinction, naming, relation, evaluation.
+- [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — environment, agent, role, permission/constraint, prospective consequence.
+- [`genesis/03_GENESIS_03.md`](genesis/03_GENESIS_03.md) — competing claims, evaluation, action, state change, inquiry, attribution, consequences, access restriction.
+
+The point is not to force a universal schema across chapters. Each chapter should be made legible on its own terms first, then compared with earlier material only where that comparison is genuinely useful.
+
+## Current Genesis progression
+
+A deliberately simple compression of the first three chapters is:
 
 ```text
-pinned repository + commit + tree
-source book file
-JSON pointer
-source-file SHA-512
-verse-text SHA-256
+Genesis 1
+  less differentiated world
+    → distinctions
+    → naming / classes
+    → relations / functions
+    → evaluation
+
+Genesis 2
+  environment
+    → human agent
+    → role
+    → permission / prohibition
+    → prospective consequence
+
+Genesis 3
+  prior rule
+    → competing claims about consequence
+    → evaluation
+    → action
+    → changed state / knowledge
+    → concealment
+    → inquiry / attribution
+    → changed conditions
+    → removal / access restriction
 ```
 
-The intended relation is:
-
-```math
-\boxed{
-\text{canonical verse}
-\leftrightarrow
-\text{exact source bytes}
-\leftrightarrow
-\text{deterministic extraction}
-}
-```
+These are reading aids, not claims that the chapters reduce to state machines.
 
 ## Machine-readable layer
 
-The corpus pipeline is:
+The corpus pipeline remains:
 
 ```math
 \boxed{
@@ -256,140 +221,71 @@ with:
 
 The canonical verse format is documented in [`docs/AI_PARSABLE_CORPUS.md`](docs/AI_PARSABLE_CORPUS.md) and [`corpus/README.md`](corpus/README.md).
 
-Mechanical annotations are sidecars that reference canonical verse records by ID and exact character offsets; they do not copy matched text into the annotation record.
+Mechanical annotations are sidecars referencing canonical verse records by ID and offsets. Structural reading can be richer and more flexible because its purpose is legibility rather than pretending that every useful relation was known before reading the text.
 
-## Structural-decoding discipline
+## Historical decoder-evaluation research
 
-The structural layer obeys:
+The repository contains a completed methodological branch in which Genesis 1–2 were used to calibrate a frozen decoder, Genesis 3 was parsed as held-out material, and that parse was audited.
 
-```math
-\boxed{\text{TEXT} \neq \text{STRUCTURAL PARSE} \neq \text{INTERPRETATION}}
+Those artifacts remain in Git because they are real research history and contain useful lessons about overinterpretation, coverage, provenance, and causal isolation.
+
+They are **not the governing workflow for continuing the Bible reading**.
+
+Historical material includes:
+
+```text
+verification/genesis/
+decoder/
+heldout/genesis/
+diagnosis/
 ```
 
-and:
-
-```math
-\boxed{\textbf{Every formal symbol must correspond to something actually recoverable from the text.}}
-```
-
-Frozen D1 adds the governing admission rule:
-
-```math
-\boxed{
-\text{weaker textual relation}
-\not\Rightarrow
-\text{stronger formal type}
-}
-```
-
-A stronger formal type is admissible only when the text supplies the bridge required for that strengthening.
-
-At the same time:
-
-```math
-\boxed{
-\text{everything}=\mathrm{OPEN}
-}
-```
-
-is not an acceptable decoder because it destroys recoverable structure. The objective is to preserve maximal textually licensed structure while minimizing unsupported formal commitment.
-
-Typed structural objects may include:
-
-```math
-S_t = \text{state}
-```
-
-```math
-R_t = \text{representation / represented distinction}
-```
-
-```math
-\hat P_t = \text{prediction or prospective claim}
-```
-
-```math
-A_t = \text{action / transformation}
-```
-
-```math
-C_{t+1} = \text{observed consequence}
-```
-
-```math
-\Pi_{t+1} = \text{provenance / causal attribution}
-```
-
-```math
-\mathcal A(S_t) = \text{available / represented action structure}
-```
-
-```math
-\mathcal P(S_t) = \text{explicitly permitted action structure}
-```
-
-```math
-\mathcal F_H(S_t) = \text{reachable future structure over horizon }H
-```
-
-These types must not be silently collapsed.
-
-## Calibration and held-out artifacts
-
-Genesis 1–2 were re-derived from verified canonical slices before D1 was frozen:
-
-- [`verification/genesis/01_REDERIVATION_AUDIT.md`](verification/genesis/01_REDERIVATION_AUDIT.md)
-- [`verification/genesis/02_REDERIVATION_AUDIT.md`](verification/genesis/02_REDERIVATION_AUDIT.md)
-
-The original derivative analyses remain historical downstream artifacts rather than canonical evidence:
-
-- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md)
-- [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md)
-
-Frozen decoder:
+In particular:
 
 - [`decoder/D1.md`](decoder/D1.md)
-- [`decoder/D1_MANIFEST.json`](decoder/D1_MANIFEST.json)
-
-Frozen held-out Genesis 3 output:
-
 - [`heldout/genesis/03_P3_RAW_PARSE.md`](heldout/genesis/03_P3_RAW_PARSE.md)
-- [`heldout/genesis/03_P3_MANIFEST.json`](heldout/genesis/03_P3_MANIFEST.json)
-
-Post-freeze audit:
-
 - [`heldout/genesis/03_A3_SCORING_AUDIT.md`](heldout/genesis/03_A3_SCORING_AUDIT.md)
-- [`heldout/genesis/03_A3_MANIFEST.json`](heldout/genesis/03_A3_MANIFEST.json)
+- [`diagnosis/A3_FAILURE_CLUSTERING.md`](diagnosis/A3_FAILURE_CLUSTERING.md)
+
+These should be read as historical methodological artifacts, not as constraints that future chapters must obey.
+
+The broader causal-cut/evidential-provenance ideas discovered during that branch may eventually deserve an independent project. They do not need to consume this one.
 
 ## Project structure
 
-- [`source/PINNED_SOURCE.json`](source/PINNED_SOURCE.json) — immutable upstream source pin and byte fingerprint.
-- [`source/README.md`](source/README.md) — source/evidence boundary.
-- [`corpus/kjv.jsonl`](corpus/kjv.jsonl) — materialized 31,102-verse evidence substrate.
-- [`corpus/MANIFEST.json`](corpus/MANIFEST.json) — deterministic ingestion fingerprint and boundaries.
-- [`.github/workflows/materialize-corpus.yml`](.github/workflows/materialize-corpus.yml) — reproducible GitHub-side materialization and verification.
-- [`docs/AI_PARSABLE_CORPUS.md`](docs/AI_PARSABLE_CORPUS.md) — machine-readable corpus specification.
-- [`schema/verse.schema.json`](schema/verse.schema.json) — provenance-bound canonical verse schema.
-- [`schema/annotation.schema.json`](schema/annotation.schema.json) — offset-only mechanical sidecar annotation schema.
-- [`scripts/ingest_kjv.py`](scripts/ingest_kjv.py) — deterministic source verifier/extractor.
-- [`scripts/normalize_kjv.py`](scripts/normalize_kjv.py) — loss-minimizing normalizer that preserves provenance.
-- [`docs/STRUCTURAL_DECODING_METHOD.md`](docs/STRUCTURAL_DECODING_METHOD.md) — downstream structural-decoding rules.
-- [`verification/genesis/`](verification/genesis/) — canonical Genesis 1–2 substrate slices and re-derivation audits.
-- [`decoder/`](decoder/) — frozen decoder artifacts.
-- [`heldout/genesis/`](heldout/genesis/) — frozen Genesis 3 parse and post-freeze audit artifacts.
+- [`source/`](source/) — pinned source and evidence boundary.
+- [`corpus/`](corpus/) — canonical machine-readable KJV corpus.
+- [`schema/`](schema/) — verse and mechanical annotation schemas.
+- [`scripts/`](scripts/) — deterministic ingestion / normalization utilities.
+- [`docs/`](docs/) — corpus and structural-reading documentation.
+- [`genesis/`](genesis/) — primary chapter-by-chapter legibility work.
+- [`verification/`](verification/) — source-slice verification and historical re-derivation work.
+- [`decoder/`](decoder/) — historical frozen decoder research.
+- [`heldout/`](heldout/) — historical held-out evaluation artifacts.
+- [`diagnosis/`](diagnosis/) — historical post-evaluation diagnosis artifacts.
 
-## Current boundary
+## Current direction
 
-The Genesis 3 held-out evaluation is complete through `A3`.
+The project is no longer blocked on decoder training, held-out scoring, or causal-isolation machinery.
 
-The repository therefore currently supports the empirical statement:
+The current task is simply to keep reading:
 
 ```math
 \boxed{
-\textbf{D1 generalized its epistemic boundary; remaining error was predominantly structural coverage.}
+\text{chapter}
+\rightarrow
+\text{plain legibility}
+\rightarrow
+\text{structure}
+\rightarrow
+\text{patterns}
+\rightarrow
+\text{next chapter}
 }
 ```
 
-The next legitimate operation, if taken, is a **separate post-audit analysis** asking what minimal decoder deficiency accounts for the held-out failures and whether those failures earn a successor decoder.
+Interpretation can deepen later once enough of the book is structurally visible to compare patterns without forcing them.
 
-That operation must not rewrite the historical `D1`, `P3`, or `A3` artifacts.
+```math
+\boxed{\textbf{Decode the book first.}}
+```
