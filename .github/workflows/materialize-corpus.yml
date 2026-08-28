@@ -1,0 +1,115 @@
+name: Materialize pinned KJV corpus
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/materialize-corpus.yml'
+      - 'source/PINNED_SOURCE.json'
+      - 'scripts/ingest_kjv.py'
+      - 'scripts/normalize_kjv.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-pinned-kjv
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ml-didacticism
+        uses: actions/checkout@v4
+        with:
+          path: repo
+          fetch-depth: 0
+
+      - name: Checkout exact pinned KJV source
+        uses: actions/checkout@v4
+        with:
+          repository: renniemaharaj/kjv-bible
+          ref: 88723a44bb3e3f229a34f9cf11ce1b7acf971eee
+          path: upstream
+          fetch-depth: 1
+
+      - name: Materialize deterministic corpus
+        run: python repo/scripts/ingest_kjv.py upstream repo/corpus/kjv.jsonl
+
+      - name: Verify generated records and write deterministic manifest
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          corpus = Path('repo/corpus/kjv.jsonl')
+          seen = set()
+          count = 0
+          first = None
+          last = None
+
+          with corpus.open('r', encoding='utf-8') as fh:
+              for lineno, line in enumerate(fh, 1):
+                  rec = json.loads(line)
+                  count += 1
+                  vid = rec['id']
+                  if vid in seen:
+                      raise SystemExit(f'duplicate verse id at line {lineno}: {vid}')
+                  seen.add(vid)
+                  if first is None:
+                      first = vid
+                  last = vid
+
+                  src = rec['source']
+                  if src['commit'] != '88723a44bb3e3f229a34f9cf11ce1b7acf971eee':
+                      raise SystemExit(f'wrong source commit at {vid}')
+                  if src['tree'] != 'df15756d8f2922f24c36ec86081d4d3244277619':
+                      raise SystemExit(f'wrong source tree at {vid}')
+                  actual_text_hash = hashlib.sha256(rec['text_kjv'].encode('utf-8')).hexdigest()
+                  if actual_text_hash != src['text_kjv_sha256']:
+                      raise SystemExit(f'verse hash mismatch at {vid}')
+
+          if count != 31102:
+              raise SystemExit(f'expected 31102 verses, got {count}')
+          if first != 'GEN.1.1' or last != 'REV.22.21':
+              raise SystemExit(f'unexpected corpus boundaries: {first} .. {last}')
+
+          corpus_sha256 = hashlib.sha256(corpus.read_bytes()).hexdigest()
+          manifest = {
+              'schema_version': 1,
+              'artifact': 'corpus/kjv.jsonl',
+              'verse_count': count,
+              'first_id': first,
+              'last_id': last,
+              'artifact_sha256': corpus_sha256,
+              'source': {
+                  'repository': 'renniemaharaj/kjv-bible',
+                  'commit': '88723a44bb3e3f229a34f9cf11ce1b7acf971eee',
+                  'tree': 'df15756d8f2922f24c36ec86081d4d3244277619',
+                  'corpus_sha512': '7c2eff0219d59c683b1d12739a64facb22807770e05daf20cf1a4d22ef1b739d5ec03268abb8c3201fd69eb1014cc45a37697cb8abaceccd316c2e473db0b264'
+              }
+          }
+          Path('repo/corpus/MANIFEST.json').write_text(
+              json.dumps(manifest, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8'
+          )
+          print(json.dumps(manifest, indent=2, sort_keys=True))
+          PY
+
+      - name: Commit materialized evidence substrate
+        working-directory: repo
+        shell: bash
+        run: |
+          git add corpus/kjv.jsonl corpus/MANIFEST.json
+          if git diff --cached --quiet; then
+            echo 'Corpus already materialized identically.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Materialize verified pinned KJV corpus'
+          git push origin HEAD:main
