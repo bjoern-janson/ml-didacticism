@@ -1583,7 +1583,7 @@ Judah supplies one explicit reason: because he did not give Tamar to Shelah.
 
 Do not expand beyond that locally warranted relation without separate interpretive work.
 
-## OPEN 10 — Lexical meanings of Benoni-like? None here / Pharez / Zarah
+## OPEN 10 — Lexical meanings of Pharez / Zarah
 
 The chapter gives speech surrounding Pharez's naming and the thread relation around Zarah, but the structural pass should preserve the surface names and explicit speech without importing etymologies as ontology.
 
