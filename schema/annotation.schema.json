@@ -15,7 +15,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["kind", "start", "end", "text"],
+        "required": ["kind", "start", "end"],
         "properties": {
           "kind": {
             "type": "string",
@@ -41,9 +41,6 @@
           "end": {
             "type": "integer",
             "minimum": 0
-          },
-          "text": {
-            "type": "string"
           }
         }
       }
