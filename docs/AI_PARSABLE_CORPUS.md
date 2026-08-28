@@ -1,6 +1,6 @@
 # AI-Parsable KJV Corpus
 
-**Status:** corpus-preparation specification / pre-interpretive
+**Status:** corpus materialized / pre-interpretive
 
 The first machine-facing layer of this project should be deliberately boring.
 
@@ -78,7 +78,7 @@ The source pin is recorded in [`../source/PINNED_SOURCE.json`](../source/PINNED_
 
 `GEN.1.1` is an address.
 
-Each canonical verse must also be bound to:
+Each canonical verse is also bound to:
 
 - pinned source repository;
 - commit;
@@ -96,14 +96,9 @@ This prevents an unchanged address from silently pointing at changed evidence.
 
 The canonical interchange format is **JSONL**.
 
-Each line contains one verse record with a stable identifier:
+The materialized corpus is [`../corpus/kjv.jsonl`](../corpus/kjv.jsonl). Its deterministic ingestion manifest is [`../corpus/MANIFEST.json`](../corpus/MANIFEST.json).
 
-```text
-GEN.1.1
-GEN.1.2
-GEN.1.3
-...
-```
+The current artifact contains 31,102 verse records from `GEN.1.1` through `REV.22.21`.
 
 Example shape:
 
@@ -191,7 +186,7 @@ If a modern-English rendering is useful later, it must be stored as a separate e
 
 ## 6. Mechanical annotations are sidecars
 
-Annotations live in a separate JSONL file keyed by verse `id`.
+Annotations live in a separate JSONL file keyed by canonical verse `id`.
 
 Example:
 
@@ -202,14 +197,25 @@ Example:
     {
       "kind": "command",
       "start": 14,
-      "end": 32,
-      "text": "Let there be light"
+      "end": 32
     }
   ]
 }
 ```
 
-Offsets are zero-based character offsets into `text_normalized`; `end` is exclusive.
+Offsets are zero-based character offsets into the referenced verse record's `text_normalized`; `end` is exclusive.
+
+The annotation does **not** copy the matched text. The span is recovered from the canonical verse record itself:
+
+```math
+\boxed{
+\text{annotation}
+\rightarrow
+\text{verse record}
+\rightarrow
+\text{exact offsets}
+}
+```
 
 Initial annotation kinds remain close to recoverable surface structure:
 
@@ -274,7 +280,7 @@ This keeps the evidence representation stable while allowing later graph constru
 
 ## 9. Reproducible lineage
 
-The desired lineage is:
+The realized lineage is:
 
 ```math
 \boxed{
@@ -285,8 +291,6 @@ The desired lineage is:
 T_{\rm raw}+h_v
 \rightarrow
 T_{\rm normalized}
-\rightarrow
-\text{annotations}
 }
 ```
 
@@ -295,6 +299,8 @@ where:
 ```math
 h_v=\operatorname{SHA256}(T_{\rm raw}^{(v)}).
 ```
+
+The materialized JSONL has its own SHA-256 recorded in `corpus/MANIFEST.json`. Mechanical annotations remain downstream and may be deleted and regenerated independently.
 
 Any downstream artifact may be deleted and regenerated without granting it authority over the source.
 
