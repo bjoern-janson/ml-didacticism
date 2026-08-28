@@ -2,6 +2,8 @@
 
 **Status:** working method / revisable / not a theological claim
 
+> **Current-reader note:** this document records **derivation-era parsing notation**, not the final primitive architecture. Convenient categories here such as `STATE`, `EVENT`, `TIME`, `ACCESS`, `AUTHORITY`, `COMMITMENT`, and `ENTITY` were later subjected to explicit ablation. The frozen result is [`../abstraction/12_GENESIS_ARCHITECTURE_FREEZE.md`](../abstraction/12_GENESIS_ARCHITECTURE_FREEZE.md): `RELATION + REPRESENTATION`, with `SOURCE_PROVENANCE + OPEN`. Read this file for method lineage and chapter-reading discipline, not as the current ontology specification.
+
 This document governs the structural layer only. Corpus preparation happens first under [`AI_PARSABLE_CORPUS.md`](AI_PARSABLE_CORPUS.md).
 
 The project order is:
