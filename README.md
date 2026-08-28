@@ -4,6 +4,24 @@ A structural reading project for the King James Bible (KJV) using machine-learni
 
 The project is **not** a theological replacement, doctrinal paraphrase, or claim that ancient authors intended modern ML concepts.
 
+The current experiment is a provenance-bound held-out decoder evaluation:
+
+```math
+\boxed{
+\text{Genesis 1--2 calibration}
+\rightarrow
+D_1^F
+\rightarrow
+T_{\mathrm{GEN.3}}^F
+\rightarrow
+P_3^F
+\rightarrow
+A_3
+}
+```
+
+where the audit may change confidence in the decoder but may not rewrite the frozen decoder or its held-out output.
+
 ## Canonical order
 
 ```math
@@ -24,18 +42,122 @@ The governing evidence invariant is:
 \boxed{\textbf{downstream revisions never mutate upstream evidence}}
 ```
 
-## Evidence-substrate status
+The held-out invariant is:
 
-```text
-source pinned                         ✓
-deterministic extractor implemented ✓
-source fingerprint verified         ✓
-corpus materialized                 ✓
-ingestion verification              ✓
-Genesis 1–2 re-derived              ✗
+```math
+\boxed{
+A_3\text{ may alter confidence in }D_1
+\quad\neq\quad
+A_3\text{ may alter }D_1\text{ or }P_3
+}
 ```
 
-No further chapter decoding should be treated as canonical until the existing Genesis 1–2 derivative analyses are rechecked against the materialized corpus.
+## Experimental status
+
+```text
+source pinned                           ✓
+deterministic extractor implemented   ✓
+source fingerprint verified           ✓
+corpus materialized                   ✓
+ingestion verification                ✓
+Genesis 1 canonical re-derivation     ✓
+Genesis 2 canonical re-derivation     ✓
+D1 frozen before Genesis 3             ✓
+Genesis 3 held-out parse P3 frozen    ✓
+P3 frozen before scoring               ✓
+A3 scoring audit complete              ✓
+D1 modified by A3                      ✗
+P3 modified by A3                      ✗
+D2 proposed inside A3                  ✗
+```
+
+The clean causal sequence is:
+
+```text
+Genesis 1–2
+   ↓
+canonical re-derivation audits
+   ↓
+D1
+   ↓
+FREEZE
+   ↓
+Genesis 3
+   ↓
+P3
+   ↓
+FREEZE
+   ↓
+A3 scoring audit
+   ↓
+belief update about D1
+   ↓
+only afterward: possible successor decoder
+```
+
+## Held-out Genesis 3 result
+
+Frozen D1 was scored on frozen P3 against the predeclared error axes:
+
+```text
+unsupported structural promotion
+missed recoverable structure
+```
+
+using claim/abstention-level classifications:
+
+```text
+SURVIVED
+FALSE PROMOTION
+MISSED STRUCTURE
+CORRECT ABSTENTION
+NEW FAILURE MODE
+```
+
+A3 found:
+
+```text
+FALSE PROMOTION:       1
+MISSED STRUCTURE:      12
+NEW FAILURE MODE:      0
+explicit OPEN items:   49
+correct OPEN items:    49
+```
+
+Therefore:
+
+```math
+\boxed{
+49/49\ \text{explicit OPENs were correct abstentions}
+}
+```
+
+and:
+
+```math
+\boxed{
+\text{D1 generalized its epistemic boundary; its remaining failure is predominantly structural coverage.}
+}
+```
+
+The observed misses cluster around:
+
+```text
+explicit discourse / connective edges
+predicate detail
+speaker / action attribution
+temporal relations
+cross-verse proposition correspondence
+```
+
+This clustering is a diagnostic result, not a decoder repair.
+
+See:
+
+- [`heldout/genesis/03_A3_SCORING_AUDIT.md`](heldout/genesis/03_A3_SCORING_AUDIT.md)
+- [`heldout/genesis/03_A3_MANIFEST.json`](heldout/genesis/03_A3_MANIFEST.json)
+
+The original [`heldout/genesis/03_P3_MANIFEST.json`](heldout/genesis/03_P3_MANIFEST.json) intentionally remains frozen at its pre-scoring state and therefore still records `scoring_status: NOT_RUN`. The later A3 artifacts record the audit without mutating that historical checkpoint.
 
 ## Source status
 
@@ -138,7 +260,7 @@ Mechanical annotations are sidecars that reference canonical verse records by ID
 
 ## Structural-decoding discipline
 
-The structural layer still obeys:
+The structural layer obeys:
 
 ```math
 \boxed{\text{TEXT} \neq \text{STRUCTURAL PARSE} \neq \text{INTERPRETATION}}
@@ -150,7 +272,27 @@ and:
 \boxed{\textbf{Every formal symbol must correspond to something actually recoverable from the text.}}
 ```
 
-If a needed causal, intentional, predictive, normative, or other bridge is absent, mark it **OPEN** rather than completing it by assumption.
+Frozen D1 adds the governing admission rule:
+
+```math
+\boxed{
+\text{weaker textual relation}
+\not\Rightarrow
+\text{stronger formal type}
+}
+```
+
+A stronger formal type is admissible only when the text supplies the bridge required for that strengthening.
+
+At the same time:
+
+```math
+\boxed{
+\text{everything}=\mathrm{OPEN}
+}
+```
+
+is not an acceptable decoder because it destroys recoverable structure. The objective is to preserve maximal textually licensed structure while minimizing unsupported formal commitment.
 
 Typed structural objects may include:
 
@@ -192,6 +334,33 @@ C_{t+1} = \text{observed consequence}
 
 These types must not be silently collapsed.
 
+## Calibration and held-out artifacts
+
+Genesis 1–2 were re-derived from verified canonical slices before D1 was frozen:
+
+- [`verification/genesis/01_REDERIVATION_AUDIT.md`](verification/genesis/01_REDERIVATION_AUDIT.md)
+- [`verification/genesis/02_REDERIVATION_AUDIT.md`](verification/genesis/02_REDERIVATION_AUDIT.md)
+
+The original derivative analyses remain historical downstream artifacts rather than canonical evidence:
+
+- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md)
+- [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md)
+
+Frozen decoder:
+
+- [`decoder/D1.md`](decoder/D1.md)
+- [`decoder/D1_MANIFEST.json`](decoder/D1_MANIFEST.json)
+
+Frozen held-out Genesis 3 output:
+
+- [`heldout/genesis/03_P3_RAW_PARSE.md`](heldout/genesis/03_P3_RAW_PARSE.md)
+- [`heldout/genesis/03_P3_MANIFEST.json`](heldout/genesis/03_P3_MANIFEST.json)
+
+Post-freeze audit:
+
+- [`heldout/genesis/03_A3_SCORING_AUDIT.md`](heldout/genesis/03_A3_SCORING_AUDIT.md)
+- [`heldout/genesis/03_A3_MANIFEST.json`](heldout/genesis/03_A3_MANIFEST.json)
+
 ## Project structure
 
 - [`source/PINNED_SOURCE.json`](source/PINNED_SOURCE.json) — immutable upstream source pin and byte fingerprint.
@@ -205,7 +374,22 @@ These types must not be silently collapsed.
 - [`scripts/ingest_kjv.py`](scripts/ingest_kjv.py) — deterministic source verifier/extractor.
 - [`scripts/normalize_kjv.py`](scripts/normalize_kjv.py) — loss-minimizing normalizer that preserves provenance.
 - [`docs/STRUCTURAL_DECODING_METHOD.md`](docs/STRUCTURAL_DECODING_METHOD.md) — downstream structural-decoding rules.
-- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — derivative Genesis 1 analysis; recheck pending.
-- [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — derivative Genesis 2 analysis; recheck pending.
+- [`verification/genesis/`](verification/genesis/) — canonical Genesis 1–2 substrate slices and re-derivation audits.
+- [`decoder/`](decoder/) — frozen decoder artifacts.
+- [`heldout/genesis/`](heldout/genesis/) — frozen Genesis 3 parse and post-freeze audit artifacts.
 
-Genesis 1–2 remain analyses, not canonical evidence. The next legitimate downstream operation is to re-derive or recheck them from the frozen corpus before any Genesis 3 decoding.
+## Current boundary
+
+The Genesis 3 held-out evaluation is complete through `A3`.
+
+The repository therefore currently supports the empirical statement:
+
+```math
+\boxed{
+\textbf{D1 generalized its epistemic boundary; remaining error was predominantly structural coverage.}
+}
+```
+
+The next legitimate operation, if taken, is a **separate post-audit analysis** asking what minimal decoder deficiency accounts for the held-out failures and whether those failures earn a successor decoder.
+
+That operation must not rewrite the historical `D1`, `P3`, or `A3` artifacts.
