@@ -16,6 +16,14 @@ The governing boundary is:
 
 A structural parse may be useful while still being incomplete, contestable, or non-unique.
 
+The strongest symbol discipline is:
+
+```math
+\boxed{\textbf{Every formal symbol must correspond to something actually recoverable from the text.}}
+```
+
+If a passage does not identify whether something is causal, intentional, predictive, normative, or otherwise typed, preserve the gap as **OPEN** rather than completing it by assumption.
+
 ---
 
 # 1. Decoding pipeline
@@ -69,7 +77,11 @@ C_{t+1} = \text{observed / narrated consequence}
 ```
 
 ```math
-\mathcal A(S_t) = \text{available action structure from state }S_t
+\mathcal A(S_t) = \text{available / represented action structure from state }S_t
+```
+
+```math
+\mathcal P(S_t) = \text{actions explicitly permitted in state }S_t
 ```
 
 ```math
@@ -92,6 +104,26 @@ not automatically:
 
 ```math
 U_t \equiv \text{complete causal mechanism}.
+```
+
+Likewise, an explicitly forbidden action may still be represented by the text as a possible branch. Therefore availability and permission must remain separate:
+
+```math
+\boxed{
+\mathcal A(S_t)
+\neq
+\mathcal P(S_t).
+}
+```
+
+And neither is identical to a represented future consequence:
+
+```math
+\boxed{
+\mathcal P(S_t)
+\neq
+\hat P_t.
+}
 ```
 
 ---
@@ -125,6 +157,18 @@ What happened is not identical to an explanation of why it happened.
 A state description is not identical to the actions available from that state.
 
 ```math
+\boxed{\mathcal A(S_t) \neq \mathcal P(S_t)}
+```
+
+An available or represented action is not automatically permitted.
+
+```math
+\boxed{\mathcal P(S_t) \neq \hat P_t}
+```
+
+What is permitted is not identical to what is predicted to happen.
+
+```math
 \boxed{\mathcal A(S_t) \neq \mathcal F_H(S_t)}
 ```
 
@@ -153,6 +197,8 @@ The following labels are descriptive conveniences, not claims about authorial in
 - **CONSEQUENCE** — later narrated state following an action or event.
 - **PROVENANCE** — textual attribution of source, speaker, cause, lineage, or responsibility.
 - **EVALUATION** — explicit positive/negative assessment of a state, action, or consequence.
+- **AVAILABLE ACTION** — action represented as an executable or conditionally reachable branch.
+- **PERMISSION** — explicit normative allowance or prohibition associated with an action.
 - **ACTION-SPACE CHANGE** — change in what actions are available or forbidden.
 - **FUTURE-SPACE CHANGE** — change in which future trajectories are reachable.
 
@@ -191,9 +237,9 @@ Each chapter should normally contain:
 1. **Scope and boundary** — what is being parsed and what is not being claimed.
 2. **Surface anchors** — short KJV phrases or verse references sufficient to locate the structure.
 3. **Plain rendering** — minimal modern-language restatement.
-4. **Typed parse** — states, distinctions, actions, predictions, consequences, relations, provenance, evaluation.
+4. **Typed parse** — states, distinctions, actions, permissions, predictions, consequences, relations, provenance, evaluation.
 5. **Transition graph** — compressed sequence of changes.
-6. **Future-space effects** — where the passage changes available actions or reachable futures.
+6. **Future-space effects** — where the passage changes available actions, permitted actions, or reachable futures.
 7. **Non-inferences** — tempting conclusions the text does not yet license.
 8. **Information-preservation candidate** — the smallest structural pattern apparently being preserved.
 9. **Open questions** — ambiguities to carry forward rather than resolve by assumption.
@@ -238,6 +284,8 @@ Do not claim merely from a structural resemblance:
 - that a named category is ontologically exhaustive;
 - that an explicit evaluation supplies a universal value function;
 - that a present-day interpretation recovers the historical generating process;
-- that one chapter's structural grammar must govern every later genre.
+- that one chapter's structural grammar must govern every later genre;
+- that physical availability, textual availability, permission, and prediction are interchangeable;
+- that a symbol may be introduced merely because it would make the formalism look complete.
 
 The method is successful when it makes the text **more legible while preserving uncertainty**, not when it forces every passage into one modern theory.
