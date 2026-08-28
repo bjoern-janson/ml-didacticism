@@ -2,9 +2,25 @@
 
 **Status:** working method / revisable / not a theological claim
 
-This project uses modern ML, causal, temporal, and state-transition vocabulary to expose information structure in the King James Bible without pretending that the vocabulary is the text's own theory.
+This document governs the structural layer only. Corpus preparation happens first under [`AI_PARSABLE_CORPUS.md`](AI_PARSABLE_CORPUS.md).
 
-The primary question is:
+The project order is:
+
+```math
+\boxed{
+\text{raw KJV}
+\rightarrow
+\text{normalized corpus}
+\rightarrow
+\text{mechanical annotations}
+\rightarrow
+\text{structural decoding}
+\rightarrow
+\text{bounded interpretation}
+}
+```
+
+The structural layer asks:
 
 > **What information structure is this text preserving?**
 
@@ -26,13 +42,15 @@ If a passage does not identify whether something is causal, intentional, predict
 
 ---
 
-# 1. Decoding pipeline
+# 1. Structural decoding pipeline
+
+Once the machine-legible source layer exists, structural decoding proceeds as:
 
 ```math
 \boxed{
-\text{KJV surface text}
+\text{source text + mechanical spans}
 \rightarrow
-\text{modern plain rendering}
+\text{optional plain rendering}
 \rightarrow
 \text{typed structural parse}
 \rightarrow
@@ -42,9 +60,9 @@ If a passage does not identify whether something is causal, intentional, predict
 }
 ```
 
-The plain rendering is not intended to replace the KJV. It only reduces surface-language friction.
+The plain rendering is optional and explicitly lossy. It never replaces `text_kjv` or `text_normalized`.
 
-The structural parse is not intended to settle theology. It identifies observable textual relations before stronger interpretation.
+Mechanical annotation is not structural interpretation. A token or span labelled `command`, `negation`, or `question` does not by itself establish intention, causation, normativity, or theological meaning.
 
 ---
 
@@ -88,13 +106,13 @@ C_{t+1} = \text{observed / narrated consequence}
 \mathcal F_H(S_t) = \text{reachable future structure from }S_t\text{ over horizon }H
 ```
 
-When useful, distinguish an utterance or instruction from its subsequent transformation rather than treating speech as the mechanism by assumption:
+When useful, distinguish an utterance or instruction from its subsequent transformation:
 
 ```math
 U_t = \text{textually reported utterance / instruction}
 ```
 
-Then the neutral first-pass relation is:
+The neutral first-pass relation is:
 
 ```math
 U_t \rightarrow \text{subsequent narrated transition}
@@ -106,24 +124,16 @@ not automatically:
 U_t \equiv \text{complete causal mechanism}.
 ```
 
-Likewise, an explicitly forbidden action may still be represented by the text as a possible branch. Therefore availability and permission must remain separate:
+Likewise:
 
 ```math
-\boxed{
-\mathcal A(S_t)
-\neq
-\mathcal P(S_t).
-}
+\boxed{\mathcal A(S_t) \neq \mathcal P(S_t)}
 ```
 
-And neither is identical to a represented future consequence:
+and:
 
 ```math
-\boxed{
-\mathcal P(S_t)
-\neq
-\hat P_t.
-}
+\boxed{\mathcal P(S_t) \neq \hat P_t.}
 ```
 
 ---
@@ -136,43 +146,29 @@ Preserve these distinctions unless the text itself supplies a bridge:
 \boxed{R_t \neq S_{t+1}}
 ```
 
-A representation can change without the represented world changing.
-
 ```math
 \boxed{\hat P_t \neq C_{t+1}}
 ```
-
-A prediction is not the consequence that later occurs.
 
 ```math
 \boxed{C_{t+1} \neq \Pi_{t+1}}
 ```
 
-What happened is not identical to an explanation of why it happened.
-
 ```math
 \boxed{S_{t+1} \neq \mathcal A(S_{t+1})}
 ```
-
-A state description is not identical to the actions available from that state.
 
 ```math
 \boxed{\mathcal A(S_t) \neq \mathcal P(S_t)}
 ```
 
-An available or represented action is not automatically permitted.
-
 ```math
 \boxed{\mathcal P(S_t) \neq \hat P_t}
 ```
 
-What is permitted is not identical to what is predicted to happen.
-
 ```math
 \boxed{\mathcal A(S_t) \neq \mathcal F_H(S_t)}
 ```
-
-Available actions are not identical to the futures reachable through their consequences.
 
 General reading rule:
 
@@ -182,17 +178,17 @@ General reading rule:
 
 # 4. Structural operation vocabulary
 
-The following labels are descriptive conveniences, not claims about authorial intent.
+The labels below are descriptive conveniences, not claims about authorial intent.
 
-- **STATE** — a condition of the narrated system.
-- **DISTINCTION** — separation of previously undifferentiated or jointly described elements.
+- **STATE** — condition of the narrated system.
+- **DISTINCTION** — separation of previously jointly described elements.
 - **NAMING** — assignment of a textual label.
 - **CLASSIFICATION** — assignment to a type or category.
 - **TRANSFORMATION** — narrated change from one state to another.
 - **RELATION** — link between entities, classes, locations, roles, or resources.
 - **ROLE** — functional or authority relation assigned to an entity.
 - **RECURRENCE** — structure that reproduces or repeats over time.
-- **TEMPORAL INDEX** — explicit ordering, cycle, duration, season, day, generation, or horizon marker.
+- **TEMPORAL INDEX** — ordering, cycle, duration, season, day, generation, or horizon marker.
 - **PREDICTION** — represented prospective consequence or future state.
 - **CONSEQUENCE** — later narrated state following an action or event.
 - **PROVENANCE** — textual attribution of source, speaker, cause, lineage, or responsibility.
@@ -208,7 +204,7 @@ Do not create a type simply to fill a template.
 
 # 5. Evidence / interpretation labels
 
-Every strong statement should be mentally classifiable as one of:
+Every strong statement should be classifiable as one of:
 
 ### TEXTUAL
 
@@ -226,7 +222,7 @@ A stronger hypothesis about what the structure means, why it exists, or what it 
 
 The text does not identify the answer, multiple parses remain live, or the needed bridge is absent.
 
-The project should prefer `OPEN` over invented completion.
+Prefer `OPEN` over invented completion.
 
 ---
 
@@ -234,21 +230,23 @@ The project should prefer `OPEN` over invented completion.
 
 Each chapter should normally contain:
 
-1. **Scope and boundary** — what is being parsed and what is not being claimed.
-2. **Surface anchors** — short KJV phrases or verse references sufficient to locate the structure.
-3. **Plain rendering** — minimal modern-language restatement.
-4. **Typed parse** — states, distinctions, actions, permissions, predictions, consequences, relations, provenance, evaluation.
-5. **Transition graph** — compressed sequence of changes.
-6. **Future-space effects** — where the passage changes available actions, permitted actions, or reachable futures.
-7. **Non-inferences** — tempting conclusions the text does not yet license.
-8. **Information-preservation candidate** — the smallest structural pattern apparently being preserved.
-9. **Open questions** — ambiguities to carry forward rather than resolve by assumption.
+1. **Scope and boundary**.
+2. **Surface anchors**.
+3. **Optional plain rendering**.
+4. **Typed parse**.
+5. **Transition graph**.
+6. **Future-space effects**.
+7. **Non-inferences**.
+8. **Information-preservation candidate**.
+9. **Open questions**.
+
+The canonical source for every chapter remains the verse corpus; plain renderings and chapter notes are derived aids.
 
 ---
 
 # 7. Relation to causal displacement
 
-A narrated transition may eventually motivate a counterfactual question such as:
+A narrated transition may motivate a counterfactual question such as:
 
 ```math
 \Phi_H
@@ -264,7 +262,7 @@ But a biblical narrative normally does **not** provide the matched counterfactua
 
 Therefore the text can identify candidate causal transitions without by itself establishing numerical causal displacement.
 
-The useful structural question is weaker:
+The weaker structural question is:
 
 ```math
 \boxed{\textbf{Which futures became possible or impossible because this changed?}}
@@ -286,6 +284,7 @@ Do not claim merely from a structural resemblance:
 - that a present-day interpretation recovers the historical generating process;
 - that one chapter's structural grammar must govern every later genre;
 - that physical availability, textual availability, permission, and prediction are interchangeable;
-- that a symbol may be introduced merely because it would make the formalism look complete.
+- that a symbol may be introduced merely because it would make the formalism look complete;
+- that a mechanical annotation is evidence for an unstated interpretation.
 
 The method is successful when it makes the text **more legible while preserving uncertainty**, not when it forces every passage into one modern theory.
