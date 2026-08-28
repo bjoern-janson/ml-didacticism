@@ -5,11 +5,24 @@ The canonical machine-readable corpus is deliberately simple:
 ```text
 corpus/
   kjv.jsonl
+  MANIFEST.json
   annotations/
     mechanical.jsonl
 ```
 
 The exact source snapshot is pinned separately under [`../source/`](../source/).
+
+## Materialization status
+
+`kjv.jsonl` is materialized from the pinned source and contains exactly **31,102** verse records from `GEN.1.1` through `REV.22.21`.
+
+`MANIFEST.json` records the deterministic artifact SHA-256 and the pinned upstream repository, commit, tree, and source-corpus SHA-512.
+
+The current `kjv.jsonl` SHA-256 is:
+
+```text
+b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc
+```
 
 ## `kjv.jsonl`
 
@@ -45,7 +58,7 @@ The source object is mandatory because:
 
 The ID is an address. The pinned source locator plus hashes bind the record to evidence.
 
-## Deterministic generation
+## Deterministic regeneration
 
 Materialize the pinned upstream snapshot, then run:
 
@@ -55,11 +68,13 @@ python scripts/ingest_kjv.py path/to/pinned/kjv-bible corpus/kjv.jsonl
 
 The ingester refuses to emit records unless the 66 exact source book files reproduce the pinned whole-corpus SHA-512 fingerprint.
 
+The tracked workflow [`.github/workflows/materialize-corpus.yml`](../.github/workflows/materialize-corpus.yml) performs the same operation on GitHub, verifies 31,102 unique verse records and every embedded verse-text hash, writes `MANIFEST.json`, and commits only if the deterministic outputs changed.
+
 ## `annotations/mechanical.jsonl`
 
-Mechanical annotations remain sidecars keyed by verse `id` and stable offsets into `text_normalized`.
+Mechanical annotations are sidecars keyed by canonical verse `id` and exact character offsets into that verse record's `text_normalized`.
 
-Annotations never overwrite source or normalized text.
+They do **not** copy the matched text. The evidence span is recovered from the referenced canonical verse record.
 
 ## Boundary
 
