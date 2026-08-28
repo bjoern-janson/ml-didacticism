@@ -6,7 +6,7 @@ A structural reading project for the King James Bible (KJV) whose primary goal i
 \boxed{\textbf{make the text legible to modern humans and machines before interpreting it}}
 ```
 
-The project uses state, action, relation, representation, information, provenance, sequence, consequence, and other machine-friendly structural language as an analytic lens.
+The project uses state, action, relation, representation, information, provenance, sequence, consequence, timing, quantity, and other machine-friendly structural language as an analytic lens.
 
 It is **not** a theological replacement, doctrinal paraphrase, or claim that biblical authors intended modern ML concepts.
 
@@ -47,6 +47,8 @@ Actions
 Relations
 Sequence
 Consequences
+Temporal markers
+Quantities
 Repeated patterns
 Uncertainties
 ```
@@ -90,6 +92,7 @@ what future consequence was stated
 what happened afterward
 what source or reason was attributed
 what relations persisted or changed
+what timing or quantity was explicitly supplied
 ```
 
 Do not strengthen a weak textual relation into a stronger claim merely because the stronger claim would make a cleaner theory.
@@ -150,7 +153,7 @@ The deterministic ingestion result is recorded in [`corpus/MANIFEST.json`](corpu
 
 ## Reading path
 
-The main project path is now the chapter-by-chapter structural reading itself:
+The main project path is the chapter-by-chapter structural reading itself:
 
 - [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — world construction, distinction, naming, relation, evaluation.
 - [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — environment, agent, role, permission/constraint, prospective consequence.
@@ -158,12 +161,13 @@ The main project path is now the chapter-by-chapter structural reading itself:
 - [`genesis/04_GENESIS_04.md`](genesis/04_GENESIS_04.md) — offerings, differential evaluation, anger/countenance change, warning, killing, inquiry, changed ground relation, future-risk prediction, protection, lineage, differentiated practices.
 - [`genesis/05_GENESIS_05.md`](genesis/05_GENESIS_05.md) — genealogical template, temporal record structure, instance alignment, localized deviations, Noah prospective statement.
 - [`genesis/06_GENESIS_06.md`](genesis/06_GENESIS_06.md) — population state, evaluation, regret/grief attribution, stated destruction, Noah distinction, earth corruption/violence, ark specification, preservation, compliance.
+- [`genesis/07_GENESIS_07.md`](genesis/07_GENESIS_07.md) — entry, specification refinement, event-time indexing, flood realization, environmental escalation, destruction, preserved subset, persistent water state.
 
 The point is not to force a universal schema across chapters. Each chapter should be made legible on its own terms first, then compared with earlier material only where that comparison is genuinely useful.
 
 ## Current Genesis progression
 
-A deliberately simple compression of the first six chapters is:
+A deliberately simple compression of the first seven chapters is:
 
 ```text
 Genesis 1
@@ -222,9 +226,57 @@ Genesis 6
     → destruction + preservation branches
     → resource provisioning
     → reported compliance
+
+Genesis 7
+  entry instruction
+    → preservation specification refined
+    → seven-day interval
+    → household / animal entry
+    → precisely indexed flood onset
+    → water increase / ark displacement
+    → destruction outside preservation structure
+    → surviving ark subset
+    → waters prevail for 150 days
 ```
 
 These are reading aids, not claims that the chapters reduce to state machines.
+
+## Cross-chapter correspondence without benchmark language
+
+Some chapters explicitly set up future-oriented structures that later chapters narrate as events.
+
+Genesis 6 → Genesis 7 is the clearest example so far:
+
+```math
+\boxed{
+\text{future-oriented specification}
+\rightarrow
+\text{later textual event correspondence}
+}
+```
+
+The important distinction remains:
+
+```math
+\boxed{
+\text{prospective statement}
+\neq
+\text{narrated realization}
+}
+```
+
+The useful task is to record which structures recur, become events, are refined, or are left unstated later—not to turn the reading into a prediction-accuracy benchmark.
+
+Genesis 7 also introduces enough explicit timing to justify simple timeline representations:
+
+```text
+waiting interval
+calendar-like event index
+duration markers
+quantitative state markers
+```
+
+These should be preserved where explicit without manufacturing chronology the text does not itself supply.
 
 ## Machine-readable layer
 
