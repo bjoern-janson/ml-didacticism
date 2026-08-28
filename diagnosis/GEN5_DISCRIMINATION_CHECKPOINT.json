@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "purpose": "H1 versus R1/R2 diagnostic discrimination",
+  "protocol": {
+    "artifact": "diagnosis/A3_H1_DISCRIMINATION_PROTOCOL.md",
+    "git_blob": "a894d0f43bdf05612732c7e93dee843581e8758c",
+    "freeze_commit": "d74ad475bab58cce6f3262dbeb63118e63cef276",
+    "frozen_before_genesis_5_exposure": true
+  },
+  "diagnostic_passage": {
+    "book": "Genesis",
+    "chapter": 5,
+    "first_verse": 1,
+    "last_verse": 32,
+    "upstream_repository": "renniemaharaj/kjv-bible",
+    "upstream_commit": "88723a44bb3e3f229a34f9cf11ce1b7acf971eee",
+    "upstream_file": "Genesis.json",
+    "upstream_file_git_blob": "1660aecb0d26e92d76b620db3321661f6c21575b",
+    "exposed_after_protocol_freeze": true
+  },
+  "decoder": {
+    "artifact": "decoder/D1.md",
+    "version": "D1",
+    "git_blob": "4c1a36da5f5e8b59606a1d2fdbdda010c4dbe62f",
+    "modified": false
+  },
+  "p5": {
+    "status": "NOT_RUN",
+    "artifact": null
+  },
+  "diagnostic_audit": {
+    "status": "NOT_RUN",
+    "artifact": null
+  },
+  "execution_context_note": "The current conversational parser has already seen A3 and the H1/R1/R2 diagnosis. A clean P5 replication should therefore be produced in a blind execution context that receives frozen D1 and the frozen Genesis 5 evidence but not A3, H1, R1, R2, or the discrimination scoring criteria. No P5 is generated in this context to avoid diagnosis-to-parse leakage.",
+  "invariant": "Diagnosis may determine what is measured next, but may not train the execution that generates the diagnostic parse."
+}
