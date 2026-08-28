@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "audit": "A3",
+  "status": "FROZEN_AUDIT_COMPLETE",
+  "artifact": "heldout/genesis/03_A3_SCORING_AUDIT.md",
+  "artifact_git_blob": "16983cb40ec3155491282b04bd59171183c7dadc",
+  "creation_commit": "a344f2a264536ba96b0184659dcf1d0bb2057f1c",
+  "inputs": {
+    "decoder": {
+      "artifact": "decoder/D1.md",
+      "version": "D1",
+      "git_blob": "4c1a36da5f5e8b59606a1d2fdbdda010c4dbe62f",
+      "sha256": "b5b50e58b43602de61ca4c35fe38fbc45518ea46ddcaaed1f36cb6e31f8ff12a",
+      "freeze_commit": "c66414fb33366fcf213410b3a0789c032be264c2"
+    },
+    "parse": {
+      "artifact": "heldout/genesis/03_P3_RAW_PARSE.md",
+      "version": "P3",
+      "git_blob": "73ac3c8b5e2474a6fb1ee16b6ffedd8e6a942b60",
+      "sha256": "e9c2c0fadc0dc47bb6e2f2ff61dfde645b632f14f81e96be4ef46c1ea56c232a",
+      "creation_commit": "f1a5c93f8013173bf519cbe2395b057374caf836"
+    },
+    "evidence": {
+      "source_corpus": "corpus/kjv.jsonl",
+      "source_corpus_sha256": "b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc",
+      "passage": "Genesis 3",
+      "first_id": "GEN.3.1",
+      "last_id": "GEN.3.24",
+      "verse_count": 24,
+      "canonical_slice_sha256": "e9fa5eb2a0ef5713104559a2dbadcbdf93bd3f288fc0f7f8d9a5eaac614a64c1"
+    }
+  },
+  "rubric": {
+    "unit": "claim_or_abstention x canonical_evidence x applicable_frozen_D1_rule",
+    "classes": [
+      "SURVIVED",
+      "FALSE_PROMOTION",
+      "MISSED_STRUCTURE",
+      "CORRECT_ABSTENTION",
+      "NEW_FAILURE_MODE"
+    ],
+    "fixed_before_scoring_in_experimental_session": true,
+    "repository_level_prescoring_rubric_commit": null,
+    "note": "No separate rubric artifact was committed before scoring; this manifest does not claim a repository-level rubric precommit."
+  },
+  "scores": {
+    "false_promotion": 1,
+    "missed_structure": 12,
+    "new_failure_mode": 0,
+    "explicit_open": 49,
+    "correct_abstention": 49
+  },
+  "result": "D1 generalized its epistemic boundary; remaining error is predominantly structural coverage.",
+  "immutability": {
+    "decoder_modified_by_audit": false,
+    "parse_modified_by_audit": false,
+    "p3_manifest_modified_by_audit": false,
+    "d2_proposed_in_audit": false
+  },
+  "invariant": "A3 may alter confidence in D1 but may not alter D1 or P3."
+}
