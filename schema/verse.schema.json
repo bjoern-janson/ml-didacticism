@@ -10,7 +10,8 @@
     "chapter",
     "verse",
     "text_kjv",
-    "text_normalized"
+    "text_normalized",
+    "source"
   ],
   "properties": {
     "id": {
@@ -30,10 +31,52 @@
       "minimum": 1
     },
     "text_kjv": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "text_normalized": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "tree",
+        "file",
+        "json_pointer",
+        "source_file_sha512",
+        "text_kjv_sha256"
+      ],
+      "properties": {
+        "repository": {
+          "const": "renniemaharaj/kjv-bible"
+        },
+        "commit": {
+          "const": "88723a44bb3e3f229a34f9cf11ce1b7acf971eee"
+        },
+        "tree": {
+          "const": "df15756d8f2922f24c36ec86081d4d3244277619"
+        },
+        "file": {
+          "type": "string",
+          "pattern": "^.+\\.json$"
+        },
+        "json_pointer": {
+          "type": "string",
+          "pattern": "^/[1-9][0-9]*/[1-9][0-9]*$"
+        },
+        "source_file_sha512": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{128}$"
+        },
+        "text_kjv_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
     }
   }
 }
