@@ -1,30 +1,98 @@
 # ML Didacticism
 
-A machine-legible and structurally disciplined reading project for the King James Bible (KJV).
+A structural reading project for the King James Bible (KJV) using machine-learning, causal, state-transition, representation, and information-processing language as an analytic lens.
 
 The project is **not** a theological replacement, doctrinal paraphrase, or claim that ancient authors intended modern ML concepts.
 
-The first goal is simpler:
-
-> **Make the text easy for an AI to inspect before asking the AI what the text means.**
-
-The pipeline is:
+## Canonical order
 
 ```math
 \boxed{
-\text{RAW KJV}
+\text{SOURCE}
 \rightarrow
-\text{normalized verse corpus}
+\text{PARSABLE CORPUS}
 \rightarrow
-\text{mechanical annotations}
+\text{STRUCTURAL DECODING}
 \rightarrow
-\text{structural decoding}
-\rightarrow
-\text{bounded interpretation}
+\text{INTERPRETATION}
 }
 ```
 
-The layers must remain distinct:
+The governing evidence invariant is:
+
+```math
+\boxed{\textbf{downstream revisions never mutate upstream evidence}}
+```
+
+The current exact source snapshot is pinned under [`source/`](source/).
+
+## Source status
+
+Pinned source:
+
+```text
+repository: renniemaharaj/kjv-bible
+commit:     88723a44bb3e3f229a34f9cf11ce1b7acf971eee
+tree:       df15756d8f2922f24c36ec86081d4d3244277619
+```
+
+Pinned 66-book corpus SHA-512:
+
+```text
+7c2eff0219d59c683b1d12739a64facb22807770e05daf20cf1a4d22ef1b739d5ec03268abb8c3201fd69eb1014cc45a37697cb8abaceccd316c2e473db0b264
+```
+
+“KJV” is not treated as a sufficient source identifier. The immutable git snapshot and fingerprints identify the source bytes; upstream historical/edition labels remain provenance claims rather than authority supplied by this repository.
+
+## Verse identity
+
+```math
+\boxed{\text{verse ID} \neq \text{evidence}}
+```
+
+A verse ID such as `GEN.1.1` is an address.
+
+A canonical verse record is bound to evidence by:
+
+```text
+pinned repository + commit + tree
+source book file
+JSON pointer
+source-file SHA-512
+verse-text SHA-256
+```
+
+The intended relation is:
+
+```math
+\boxed{
+\text{canonical verse}
+\leftrightarrow
+\text{exact source bytes}
+\leftrightarrow
+\text{deterministic extraction}
+}
+```
+
+## Machine-readable layer
+
+The corpus pipeline is:
+
+```math
+\boxed{
+T_{\rm raw}
+\rightarrow
+T_{\rm normalized}
+\rightarrow
+A_{\rm mechanical}
+\rightarrow
+S_{\rm structural}
+\rightarrow
+I_{\rm interpretive}
+}
+```
+
+with:
 
 ```math
 \boxed{
@@ -40,42 +108,19 @@ The layers must remain distinct:
 }
 ```
 
-No later layer overwrites the layer below it.
+The canonical verse format is documented in [`docs/AI_PARSABLE_CORPUS.md`](docs/AI_PARSABLE_CORPUS.md) and [`corpus/README.md`](corpus/README.md).
 
-## AI-parsable corpus layer
+The deterministic ingester is [`scripts/ingest_kjv.py`](scripts/ingest_kjv.py). It verifies the pinned source-byte fingerprint before emitting any verse.
 
-The canonical corpus format is **JSONL with one verse per record**.
+## Structural-decoding discipline
 
-The raw and normalized records preserve:
-
-```text
-id
-book
-chapter
-verse
-text_kjv
-text_normalized
-```
-
-Mechanical annotations live in sidecar JSONL files keyed by verse `id` and use stable character spans.
-
-Normalization is deliberately loss-minimizing. It may normalize Unicode and whitespace, but it does **not** modernize spelling, archaic pronouns, morphology, capitalization, punctuation, lexical choice, or word order.
-
-See [`docs/AI_PARSABLE_CORPUS.md`](docs/AI_PARSABLE_CORPUS.md).
-
-## Structural decoding layer
-
-Only after the source is machine-legible do we ask:
-
-> **What information structure is this text preserving?**
-
-The structural invariant is:
+The structural layer still obeys:
 
 ```math
 \boxed{\text{TEXT} \neq \text{STRUCTURAL PARSE} \neq \text{INTERPRETATION}}
 ```
 
-The strongest symbol rule is:
+and:
 
 ```math
 \boxed{\textbf{Every formal symbol must correspond to something actually recoverable from the text.}}
@@ -83,7 +128,7 @@ The strongest symbol rule is:
 
 If a needed causal, intentional, predictive, normative, or other bridge is absent, mark it **OPEN** rather than completing it by assumption.
 
-The structural layer may use typed objects such as:
+Typed structural objects may include:
 
 ```math
 S_t = \text{state}
@@ -121,56 +166,19 @@ C_{t+1} = \text{observed consequence}
 \mathcal F_H(S_t) = \text{reachable future structure over horizon }H
 ```
 
-These types must not be silently collapsed:
-
-```math
-\boxed{
-R \neq S,
-\qquad
-\hat P \neq C,
-\qquad
-C \neq \Pi,
-\qquad
-S \neq \mathcal A,
-\qquad
-\mathcal A \neq \mathcal P,
-\qquad
-\mathcal P \neq \hat P,
-\qquad
-\mathcal A \neq \mathcal F
-}
-```
-
-Each bridge must be earned by the text.
+These types must not be silently collapsed.
 
 ## Project structure
 
-### Corpus preparation
+- [`source/PINNED_SOURCE.json`](source/PINNED_SOURCE.json) — immutable upstream source pin and byte fingerprint.
+- [`source/README.md`](source/README.md) — source/evidence boundary.
+- [`docs/AI_PARSABLE_CORPUS.md`](docs/AI_PARSABLE_CORPUS.md) — machine-readable corpus specification.
+- [`schema/verse.schema.json`](schema/verse.schema.json) — provenance-bound canonical verse schema.
+- [`schema/annotation.schema.json`](schema/annotation.schema.json) — mechanical sidecar annotation schema.
+- [`scripts/ingest_kjv.py`](scripts/ingest_kjv.py) — deterministic source verifier/extractor.
+- [`scripts/normalize_kjv.py`](scripts/normalize_kjv.py) — loss-minimizing normalizer that preserves provenance.
+- [`docs/STRUCTURAL_DECODING_METHOD.md`](docs/STRUCTURAL_DECODING_METHOD.md) — downstream structural-decoding rules.
+- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — derivative Genesis 1 analysis.
+- [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — derivative Genesis 2 analysis.
 
-- [`docs/AI_PARSABLE_CORPUS.md`](docs/AI_PARSABLE_CORPUS.md) — minimal machine-legibility specification.
-- [`corpus/README.md`](corpus/README.md) — corpus directory contract.
-- [`schema/verse.schema.json`](schema/verse.schema.json) — minimal verse-record schema.
-- [`schema/annotation.schema.json`](schema/annotation.schema.json) — mechanical span-annotation schema.
-- [`scripts/normalize_kjv.py`](scripts/normalize_kjv.py) — deterministic Unicode/whitespace normalizer.
-
-### Structural decoding
-
-- [`docs/STRUCTURAL_DECODING_METHOD.md`](docs/STRUCTURAL_DECODING_METHOD.md) — decoding rules and claim discipline.
-- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — Genesis 1: world-level differentiation, relation, recurrence, and evaluation.
-- [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — Genesis 2: agent-environment structure, role, permission, constraint, prospective consequence, and relational reconfiguration.
-
-## Source provenance
-
-The full KJV corpus should **not** be populated from an unspecified source.
-
-Before ingestion, pin the source / edition, source file or retrieval location, checksum, and transformation version. Then derive every later layer reproducibly from those source bytes.
-
-## Reading rule
-
-Do not infer a state transition from a representation transition, or a causal explanation from an observed consequence, unless the text supplies the bridge.
-
-A useful recurring structural question remains:
-
-```math
-\boxed{\textbf{Which futures became possible or impossible because this changed?}}
-```
+Genesis 1–2 are analyses, not canonical evidence. Once `corpus/kjv.jsonl` is materialized from the pinned source, they should be rechecked against those canonical verse records before further chapter decoding.
