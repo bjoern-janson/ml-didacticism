@@ -10,6 +10,14 @@ The core discipline is:
 \boxed{\text{TEXT} \neq \text{STRUCTURAL PARSE} \neq \text{INTERPRETATION}}
 ```
 
+The strongest symbol rule is:
+
+```math
+\boxed{\textbf{Every formal symbol must correspond to something actually recoverable from the text.}}
+```
+
+If a needed causal, intentional, predictive, normative, or other bridge is absent, mark it **OPEN** rather than completing it by assumption.
+
 The working pipeline is:
 
 ```math
@@ -57,7 +65,11 @@ C_{t+1} = \text{observed consequence}
 ```
 
 ```math
-\mathcal A(S_t) = \text{available action structure}
+\mathcal A(S_t) = \text{available / represented action structure}
+```
+
+```math
+\mathcal P(S_t) = \text{explicitly permitted action structure}
 ```
 
 ```math
@@ -76,6 +88,10 @@ C \neq \Pi,
 \qquad
 S \neq \mathcal A,
 \qquad
+\mathcal A \neq \mathcal P,
+\qquad
+\mathcal P \neq \hat P,
+\qquad
 \mathcal A \neq \mathcal F
 }
 ```
@@ -85,7 +101,8 @@ Each bridge must be earned by the text.
 ## Project structure
 
 - [`docs/STRUCTURAL_DECODING_METHOD.md`](docs/STRUCTURAL_DECODING_METHOD.md) — decoding rules and claim discipline.
-- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — Genesis 1 structural decoding.
+- [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — Genesis 1: world-level differentiation, relation, recurrence, and evaluation.
+- [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — Genesis 2: agent-environment structure, role, permission, constraint, prospective consequence, and relational reconfiguration.
 
 ## Reading rule
 
