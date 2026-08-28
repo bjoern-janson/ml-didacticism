@@ -1,0 +1,27 @@
+{
+  "artifact": "heldout/genesis/03_P3_RAW_PARSE.md",
+  "artifact_git_blob": "73ac3c8b5e2474a6fb1ee16b6ffedd8e6a942b60",
+  "artifact_sha256": "e9c2c0fadc0dc47bb6e2f2ff61dfde645b632f14f81e96be4ef46c1ea56c232a",
+  "creation_commit": "f1a5c93f8013173bf519cbe2395b057374caf836",
+  "decoder": {
+    "artifact": "decoder/D1.md",
+    "git_blob": "4c1a36da5f5e8b59606a1d2fdbdda010c4dbe62f",
+    "sha256": "b5b50e58b43602de61ca4c35fe38fbc45518ea46ddcaaed1f36cb6e31f8ff12a",
+    "version": "D1"
+  },
+  "decoder_revision_status": "NOT_PERMITTED_DURING_HELD_OUT_RUN",
+  "held_out_input": {
+    "all_text_kjv_sha256_verified": true,
+    "canonical_slice_sha256": "e9fa5eb2a0ef5713104559a2dbadcbdf93bd3f288fc0f7f8d9a5eaac614a64c1",
+    "first_id": "GEN.3.1",
+    "last_id": "GEN.3.24",
+    "source_corpus": "corpus/kjv.jsonl",
+    "source_corpus_sha256": "b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc",
+    "verse_count": 24
+  },
+  "invariant": "Genesis 3 may falsify D1 but cannot train D1.",
+  "parse": "P3",
+  "schema_version": 1,
+  "scoring_status": "NOT_RUN",
+  "status": "FROZEN_UNSCORED"
+}
