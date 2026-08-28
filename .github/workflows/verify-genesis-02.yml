@@ -1,0 +1,36 @@
+name: Verify Genesis 2 substrate slice
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/verify_genesis_02_substrate.py
+      - .github/workflows/verify-genesis-02.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify and extract canonical Genesis 2 records
+        run: python scripts/verify_genesis_02_substrate.py
+
+      - name: Commit verification artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add verification/genesis/02_CANONICAL_RECORDS.jsonl verification/genesis/02_CANONICAL_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo "Verification artifacts already current."
+            exit 0
+          fi
+          git commit -m "Verify canonical Genesis 2 substrate slice"
+          git push
