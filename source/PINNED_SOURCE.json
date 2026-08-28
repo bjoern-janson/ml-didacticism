@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "source_kind": "git_snapshot",
+  "repository": "renniemaharaj/kjv-bible",
+  "commit": "88723a44bb3e3f229a34f9cf11ce1b7acf971eee",
+  "tree": "df15756d8f2922f24c36ec86081d4d3244277619",
+  "commit_date": "2026-07-30T19:15:57Z",
+  "pinned_on": "2026-08-28",
+  "scope": {
+    "books": 66,
+    "chapters": 1189,
+    "verses": 31102
+  },
+  "source_metadata": {
+    "name": "King James Version",
+    "first_published": 1611,
+    "editorial_basis": 1769,
+    "qualification": "These labels are upstream provenance metadata, not an independent bibliographical certification by ml-didacticism."
+  },
+  "verification": {
+    "upstream_last_verified": "2026-07-30",
+    "upstream_reference": "Bible SuperSearch KJV module 6.2.0, identified by that provider as Authorized King James Version, 1611 / 1769",
+    "expected_corpus_sha512": "7c2eff0219d59c683b1d12739a64facb22807770e05daf20cf1a4d22ef1b739d5ec03268abb8c3201fd69eb1014cc45a37697cb8abaceccd316c2e473db0b264",
+    "fingerprint_domain": "KJV-JSON-CORPUS\\0v1\\0",
+    "fingerprint_algorithm": "SHA-512 over the domain bytes followed, in canonical biblical order, by 4-byte big-endian UTF-8 filename length, filename bytes, 8-byte big-endian file length, and exact raw file bytes for each of the 66 book JSON files.",
+    "upstream_sha512sums_path": "SHA512SUMS",
+    "upstream_sha512sums_git_blob": "0f34270ed666126c5d2cb587ef1e51df14128241",
+    "upstream_metadata_path": "kjv.json",
+    "upstream_metadata_git_blob": "33544fb48b74c8410895c41529e01dfa5dca14e8"
+  },
+  "source_layout": {
+    "book_files": "<Book>.json",
+    "structure": "chapter-key -> verse-key -> plain verse string",
+    "rendering_markers_excluded_from_text_substrate": true
+  },
+  "invariants": [
+    "KJV is not a sufficient source identifier.",
+    "A verse ID is an address, not evidence.",
+    "The immutable git snapshot plus byte fingerprints identify the evidence substrate.",
+    "Downstream revisions must not mutate upstream evidence."
+  ]
+}
