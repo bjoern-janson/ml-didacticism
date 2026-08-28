@@ -1,0 +1,29 @@
+{
+  "decoder": "D1",
+  "status": "FROZEN",
+  "artifact": "decoder/D1.md",
+  "artifact_sha256": "b5b50e58b43602de61ca4c35fe38fbc45518ea46ddcaaed1f36cb6e31f8ff12a",
+  "artifact_git_blob": "4c1a36da5f5e8b59606a1d2fdbdda010c4dbe62f",
+  "freeze_commit": "c66414fb33366fcf213410b3a0789c032be264c2",
+  "evidence_corpus_sha256": "b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc",
+  "calibration": {
+    "genesis_1": {
+      "audit": "verification/genesis/01_REDERIVATION_AUDIT.md",
+      "audit_commit": "40ae1669723d542e88e2f4e6bbbadca4387813c6",
+      "audit_git_blob": "2b562919491a6b5eec46f54ea08a6388aad2fd48",
+      "canonical_slice_sha256": "9704aa8da1f9ffa34dd081717615794e67f64de7e4ceb76cc746758334551d1b"
+    },
+    "genesis_2": {
+      "audit": "verification/genesis/02_REDERIVATION_AUDIT.md",
+      "audit_commit": "43d4b69e3daf66ec7d01d8a3325f8267caaaeef9",
+      "audit_git_blob": "29c909e6d2e5dc51929d0bf538605180f35dd7e4",
+      "canonical_slice_sha256": "4edaa1223f1c30bac7b5253fe10a1eeb002c6c3256927e6b52935101520f237f"
+    }
+  },
+  "held_out": {
+    "passage": "Genesis 3",
+    "status": "NOT_RUN",
+    "parse": null
+  },
+  "invariant": "D2 may learn from Genesis 3, but D1 never does."
+}
