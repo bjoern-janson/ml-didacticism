@@ -6,7 +6,7 @@ A structural reading project for the King James Bible (KJV) whose primary goal i
 \boxed{\textbf{make the text legible to modern humans and machines before interpreting it}}
 ```
 
-The project uses state, action, relation, representation, information, provenance, sequence, consequence, timing, quantity, observation, constraint, persistence, and other machine-friendly structural language as an analytic lens.
+The project uses state, action, relation, representation, information, provenance, sequence, consequence, timing, quantity, observation, constraint, persistence, capacity, choice, and other machine-friendly structural language as an analytic lens.
 
 It is **not** a theological replacement, doctrinal paraphrase, or claim that biblical authors intended modern ML concepts.
 
@@ -52,6 +52,9 @@ Quantities
 Observations / probes
 Permissions / prohibitions
 Covenant / persistence scope
+Information states
+Capacity / resource relations
+Choices / alternatives
 Repeated patterns
 Uncertainties
 ```
@@ -101,6 +104,9 @@ what interpretation of an observation was explicitly stated
 what promise or covenant was stated
 who or what that statement explicitly included
 how far forward the text explicitly extends it
+what information different agents possess or are given
+what options were offered, selected, or left unrealized
+what environmental capacity or resource relation was explicitly stated
 ```
 
 Do not strengthen a weak textual relation into a stronger claim merely because the stronger claim would make a cleaner theory.
@@ -172,12 +178,16 @@ The main project path is the chapter-by-chapter structural reading itself:
 - [`genesis/07_GENESIS_07.md`](genesis/07_GENESIS_07.md) — entry, specification refinement, event-time indexing, flood realization, environmental escalation, destruction, preserved subset, persistent water state.
 - [`genesis/08_GENESIS_08.md`](genesis/08_GENESIS_08.md) — environmental reversal, progressive recovery, repeated probes, explicit observation-to-knowledge relation, delayed release, re-entry, offering, post-flood future statements.
 - [`genesis/09_GENESIS_09.md`](genesis/09_GENESIS_09.md) — post-flood blessing, permission/prohibition, human-life accountability, covenant scope, recurring covenant sign, family episode, future lineage relations, Noah record completion.
+- [`genesis/10_GENESIS_10.md`](genesis/10_GENESIS_10.md) — typed population topology: descent, families, tongues, lands, nations, kingdoms, cities, borders, dwellings, and branch asymmetry.
+- [`genesis/11_GENESIS_11.md`](genesis/11_GENESIS_11.md) — shared language, collective coordination, construction, language intervention, dispersion, project cessation, then lineage narrowing toward Terah and Abram.
+- [`genesis/12_GENESIS_12.md`](genesis/12_GENESIS_12.md) — Abram call, instruction/promise separation, movement trajectory, famine, Egypt, agent-specific information states, representation-mediated interaction, inquiry, and release.
+- [`genesis/13_GENESIS_13.md`](genesis/13_GENESIS_13.md) — return trajectory, resource abundance, insufficient shared capacity, herdsmen conflict, offered choice, Lot's observation/selection, spatial separation, and renewed land/seed statements.
 
 The point is not to force a universal schema across chapters. Each chapter should be made legible on its own terms first, then compared with earlier material only where that comparison is genuinely useful.
 
 ## Current Genesis progression
 
-A deliberately simple compression of the first nine chapters is:
+A deliberately simple compression of the first thirteen chapters is:
 
 ```text
 Genesis 1
@@ -273,6 +283,45 @@ Genesis 9
     → local Noah-family episode
     → differentiated responses / future family relations
     → Noah's terminal genealogy record
+
+Genesis 10
+  Noah's sons
+    → branching descendants
+    → branch-specific structures
+    → families / tongues / lands / nations
+    → kingdoms / cities / borders / dwellings in selected branches
+    → earth-level population distribution
+
+Genesis 11
+  whole-earth shared language
+    → coordinated settlement / construction
+    → capability assessment
+    → language confounded / mutual understanding disrupted
+    → population scattered / building ceases
+    → timed Shem lineage
+    → Terah household / migration toward Canaan
+
+Genesis 12
+  Abram call
+    → separation instructions + future promises
+    → departure from Haran / arrival in Canaan
+    → local land promise / continued movement
+    → famine / Egypt
+    → represented threat + speech instruction
+    → Egyptian observation / Pharaoh-house interaction
+    → plague / inquiry / release
+
+Genesis 13
+  return from Egypt
+    → resource-rich co-location
+    → land cannot bear both households together
+    → herdsmen strife
+    → separation proposal / offered choice
+    → Lot observes + selects Jordan plain
+    → movement / spatial separation
+    → Abram remains in Canaan
+    → renewed visible-land + seed statement
+    → settlement at Mamre
 ```
 
 These are reading aids, not claims that the chapters reduce to state machines.
@@ -281,7 +330,7 @@ These are reading aids, not claims that the chapters reduce to state machines.
 
 Some chapters explicitly set up future-oriented structures that later chapters narrate as events.
 
-Genesis 6 → Genesis 7 is the clearest example so far:
+Genesis 6 → Genesis 7 is the clearest early example:
 
 ```math
 \boxed{
@@ -337,9 +386,7 @@ and:
 }
 ```
 
-These are chapter-local structural observations, not universal decision rules imposed on the text.
-
-Genesis 8 → Genesis 9 adds a new persistence pattern:
+Genesis 8 → Genesis 9 adds a persistence pattern:
 
 ```math
 \boxed{
@@ -353,25 +400,63 @@ Genesis 8 → Genesis 9 adds a new persistence pattern:
 }
 ```
 
-Genesis 9 makes several nearby operations worth keeping separate:
+Genesis 10 adds a typed population layer:
 
 ```math
 \boxed{
-\text{permission}
+\text{genealogical origin}
 \neq
-\text{prohibition}
+\text{family grouping}
 \neq
-\text{accountability}
+\text{language relation}
 \neq
-\text{consequence}
+\text{territory}
 \neq
-\text{covenant}
-\neq
-\text{sign of covenant}
+\text{nation}
 }
 ```
 
-The covenant scope is itself structural data because the text explicitly includes Noah, his sons, their seed after them, living creatures, all flesh, the earth, and `perpetual generations` in overlapping statements.
+Genesis 11 then narrates a language/coordination/dispersion transition while leaving the exact chronology relative to Genesis 10's population summaries OPEN.
+
+Genesis 12 introduces sustained agent-specific information states:
+
+```math
+\boxed{
+\text{world relation}
+\neq
+\text{agent knowledge}
+\neq
+\text{communicated representation}
+\neq
+\text{another agent's information state}
+}
+```
+
+Genesis 13 introduces resource/capacity and choice distinctions:
+
+```math
+\boxed{
+\text{resource abundance}
+\neq
+\text{shared capacity}
+}
+```
+
+and:
+
+```math
+\boxed{
+\text{offered choice}
+\neq
+\text{chosen option}
+\neq
+\text{movement}
+\neq
+\text{resulting spatial state}
+}
+```
+
+These are chapter-earned structural distinctions, not universal decision rules imposed on the text.
 
 ## Timeline representations
 
@@ -400,7 +485,7 @@ The key discipline is:
 
 before attempting larger chronological synthesis.
 
-Genesis 9 also closes Noah's temporal record across chapters:
+Genesis 9 closes Noah's temporal record across chapters:
 
 ```text
 Genesis 7 → Noah 600 when flood occurs
@@ -415,7 +500,35 @@ so the explicit arithmetic is:
 \boxed{600+350=950}
 ```
 
-This is cross-chapter record completion, not a new chronological theory.
+Genesis 11 then introduces a genealogy template related to but distinct from Genesis 5: age at named descendant + years afterward + sons/daughters, generally without a repeated total-lifespan and terminal formula for each intermediate ancestor.
+
+## Scale shifts
+
+One of the clearest emergent features is that the represented scale keeps changing:
+
+```math
+\boxed{
+\text{world}
+\rightarrow
+\text{environment}
+\rightarrow
+\text{individuals / families}
+\rightarrow
+\text{lineages}
+\rightarrow
+\text{populations}
+\rightarrow
+\text{collective coordination}
+\rightarrow
+\text{selected lineage / household}
+\rightarrow
+\text{agent trajectory}
+\rightarrow
+\text{multi-agent resource separation}
+}
+```
+
+This is not a claim that Genesis follows a formal systems hierarchy. It is a reading observation: different chapters naturally represent different scales, and the structural layer should change with them rather than force one universal schema.
 
 ## Persistent relations
 
@@ -433,7 +546,9 @@ perpetual-generation language
 recurring sign/token
 ```
 
-The legibility-first question is not yet what the covenant ultimately means, but:
+Genesis 12–13 add another long-running relation class: future-oriented statements attaching Abram and his seed to land while the narrative separately tracks current movement, temporary sojourn, return, spatial separation, and settlement.
+
+The legibility-first question remains:
 
 ```math
 \boxed{\textbf{What persists, for whom, and according to what explicit wording?}}
