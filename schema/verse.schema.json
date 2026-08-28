@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bjoern-janson/ml-didacticism/schema/verse.schema.json",
+  "title": "KJV Verse Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "book",
+    "chapter",
+    "verse",
+    "text_kjv",
+    "text_normalized"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{3,5}\\.[1-9][0-9]*\\.[1-9][0-9]*$"
+    },
+    "book": {
+      "type": "string",
+      "minLength": 1
+    },
+    "chapter": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "verse": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "text_kjv": {
+      "type": "string"
+    },
+    "text_normalized": {
+      "type": "string"
+    }
+  }
+}
