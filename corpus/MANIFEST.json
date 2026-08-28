@@ -1,0 +1,14 @@
+{
+  "artifact": "corpus/kjv.jsonl",
+  "artifact_sha256": "b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc",
+  "first_id": "GEN.1.1",
+  "last_id": "REV.22.21",
+  "schema_version": 1,
+  "source": {
+    "commit": "88723a44bb3e3f229a34f9cf11ce1b7acf971eee",
+    "corpus_sha512": "7c2eff0219d59c683b1d12739a64facb22807770e05daf20cf1a4d22ef1b739d5ec03268abb8c3201fd69eb1014cc45a37697cb8abaceccd316c2e473db0b264",
+    "repository": "renniemaharaj/kjv-bible",
+    "tree": "df15756d8f2922f24c36ec86081d4d3244277619"
+  },
+  "verse_count": 31102
+}
