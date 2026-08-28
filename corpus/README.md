@@ -1,36 +1,21 @@
 # Corpus Directory Contract
 
-The corpus is intentionally layered.
+The canonical machine-readable corpus is deliberately simple:
 
 ```text
 corpus/
-  raw/
-    kjv.jsonl
-  normalized/
-    kjv.jsonl
+  kjv.jsonl
   annotations/
     mechanical.jsonl
 ```
 
-These data files should be added only after the exact KJV source / edition and checksum are pinned.
+The exact source snapshot is pinned separately under [`../source/`](../source/).
 
-## `raw/kjv.jsonl`
+## `kjv.jsonl`
 
-One verse per line with:
+One verse per line.
 
-```text
-id
-book
-chapter
-verse
-text_kjv
-```
-
-`text_kjv` must preserve the ingested source wording exactly.
-
-## `normalized/kjv.jsonl`
-
-Generated deterministically from the raw corpus with:
+Each record contains:
 
 ```text
 id
@@ -39,21 +24,50 @@ chapter
 verse
 text_kjv
 text_normalized
+source.repository
+source.commit
+source.tree
+source.file
+source.json_pointer
+source.source_file_sha512
+source.text_kjv_sha256
 ```
 
-Normalization must not modernize lexical content.
+`text_kjv` is the exact verse string deterministically extracted from the pinned source JSON value.
+
+`text_normalized` is a deterministic, loss-minimizing derivative. It does not modernize spelling, pronouns, morphology, punctuation, capitalization, or word order.
+
+The source object is mandatory because:
+
+```math
+\boxed{\text{verse ID} \neq \text{evidence}}
+```
+
+The ID is an address. The pinned source locator plus hashes bind the record to evidence.
+
+## Deterministic generation
+
+Materialize the pinned upstream snapshot, then run:
+
+```bash
+python scripts/ingest_kjv.py path/to/pinned/kjv-bible corpus/kjv.jsonl
+```
+
+The ingester refuses to emit records unless the 66 exact source book files reproduce the pinned whole-corpus SHA-512 fingerprint.
 
 ## `annotations/mechanical.jsonl`
 
-Sidecar span annotations keyed by verse `id`.
+Mechanical annotations remain sidecars keyed by verse `id` and stable offsets into `text_normalized`.
 
-Annotations must point back to `text_normalized` by stable character offsets and must not overwrite or paraphrase source text.
+Annotations never overwrite source or normalized text.
 
 ## Boundary
 
 ```math
 \boxed{
-\text{raw text}
+\text{pinned source bytes}
+\neq
+\text{verse extraction}
 \neq
 \text{normalized text}
 \neq
