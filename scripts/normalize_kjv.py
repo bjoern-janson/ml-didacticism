@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Normalize KJV verse JSONL without changing lexical content.
+"""Normalize KJV verse JSONL without changing lexical content or provenance.
 
-Input JSONL records must contain:
+Input records must contain at least:
     id, book, chapter, verse, text_kjv
 
-Output records add:
+All existing fields are preserved. The normalizer only sets/replaces:
     text_normalized
 
-The normalizer performs only Unicode/whitespace cleanup. It does not modernize
-spelling, pronouns, morphology, punctuation, capitalization, or word order.
+It does not modernize spelling, pronouns, morphology, punctuation,
+capitalization, word order, or source provenance.
 """
 
 from __future__ import annotations
@@ -32,15 +32,11 @@ def normalize_record(record: dict) -> dict:
     missing = [key for key in required if key not in record]
     if missing:
         raise ValueError(f"missing required fields: {', '.join(missing)}")
+    if not isinstance(record["text_kjv"], str) or not record["text_kjv"]:
+        raise ValueError("text_kjv must be a non-empty string")
 
-    output = {
-        "id": record["id"],
-        "book": record["book"],
-        "chapter": record["chapter"],
-        "verse": record["verse"],
-        "text_kjv": record["text_kjv"],
-        "text_normalized": normalize_surface(record["text_kjv"]),
-    }
+    output = dict(record)
+    output["text_normalized"] = normalize_surface(record["text_kjv"])
     return output
 
 
@@ -65,7 +61,7 @@ def normalize_jsonl(source: Path, destination: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("source", type=Path, help="raw verse JSONL")
+    parser.add_argument("source", type=Path, help="verse JSONL")
     parser.add_argument("destination", type=Path, help="normalized verse JSONL")
     args = parser.parse_args()
 
