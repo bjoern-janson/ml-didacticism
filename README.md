@@ -6,7 +6,7 @@ A structural reading project for the King James Bible (KJV) whose primary goal i
 \boxed{\textbf{make the text legible to modern humans and machines before interpreting it}}
 ```
 
-The project uses state, action, relation, representation, information, provenance, sequence, consequence, timing, quantity, observation, and other machine-friendly structural language as an analytic lens.
+The project uses state, action, relation, representation, information, provenance, sequence, consequence, timing, quantity, observation, constraint, persistence, and other machine-friendly structural language as an analytic lens.
 
 It is **not** a theological replacement, doctrinal paraphrase, or claim that biblical authors intended modern ML concepts.
 
@@ -50,6 +50,8 @@ Consequences
 Temporal markers
 Quantities
 Observations / probes
+Permissions / prohibitions
+Covenant / persistence scope
 Repeated patterns
 Uncertainties
 ```
@@ -96,6 +98,9 @@ what relations persisted or changed
 what timing or quantity was explicitly supplied
 what was observed or checked
 what interpretation of an observation was explicitly stated
+what promise or covenant was stated
+who or what that statement explicitly included
+how far forward the text explicitly extends it
 ```
 
 Do not strengthen a weak textual relation into a stronger claim merely because the stronger claim would make a cleaner theory.
@@ -166,12 +171,13 @@ The main project path is the chapter-by-chapter structural reading itself:
 - [`genesis/06_GENESIS_06.md`](genesis/06_GENESIS_06.md) — population state, evaluation, regret/grief attribution, stated destruction, Noah distinction, earth corruption/violence, ark specification, preservation, compliance.
 - [`genesis/07_GENESIS_07.md`](genesis/07_GENESIS_07.md) — entry, specification refinement, event-time indexing, flood realization, environmental escalation, destruction, preserved subset, persistent water state.
 - [`genesis/08_GENESIS_08.md`](genesis/08_GENESIS_08.md) — environmental reversal, progressive recovery, repeated probes, explicit observation-to-knowledge relation, delayed release, re-entry, offering, post-flood future statements.
+- [`genesis/09_GENESIS_09.md`](genesis/09_GENESIS_09.md) — post-flood blessing, permission/prohibition, human-life accountability, covenant scope, recurring covenant sign, family episode, future lineage relations, Noah record completion.
 
 The point is not to force a universal schema across chapters. Each chapter should be made legible on its own terms first, then compared with earlier material only where that comparison is genuinely useful.
 
 ## Current Genesis progression
 
-A deliberately simple compression of the first eight chapters is:
+A deliberately simple compression of the first nine chapters is:
 
 ```text
 Genesis 1
@@ -255,6 +261,18 @@ Genesis 8
     → family / animals re-enter environment
     → offering
     → future non-repetition / cycle statements
+
+Genesis 9
+  post-flood state
+    → blessing / multiplication
+    → changed human-animal relation
+    → food permission + blood-related prohibition
+    → human-life accountability / consequence
+    → covenant across descendants + living creatures
+    → recurring visible covenant token
+    → local Noah-family episode
+    → differentiated responses / future family relations
+    → Noah's terminal genealogy record
 ```
 
 These are reading aids, not claims that the chapters reduce to state machines.
@@ -321,6 +339,40 @@ and:
 
 These are chapter-local structural observations, not universal decision rules imposed on the text.
 
+Genesis 8 → Genesis 9 adds a new persistence pattern:
+
+```math
+\boxed{
+\text{re-entered world}
+\rightarrow
+\text{explicit rules / permissions / constraints}
+\rightarrow
+\text{covenant extending to future generations}
+\rightarrow
+\text{recurring sign}
+}
+```
+
+Genesis 9 makes several nearby operations worth keeping separate:
+
+```math
+\boxed{
+\text{permission}
+\neq
+\text{prohibition}
+\neq
+\text{accountability}
+\neq
+\text{consequence}
+\neq
+\text{covenant}
+\neq
+\text{sign of covenant}
+}
+```
+
+The covenant scope is itself structural data because the text explicitly includes Noah, his sons, their seed after them, living creatures, all flesh, the earth, and `perpetual generations` in overlapping statements.
+
 ## Timeline representations
 
 Genesis 7–8 contain enough explicit timing to justify simple timeline representations:
@@ -347,6 +399,45 @@ The key discipline is:
 ```
 
 before attempting larger chronological synthesis.
+
+Genesis 9 also closes Noah's temporal record across chapters:
+
+```text
+Genesis 7 → Noah 600 when flood occurs
+Genesis 9 → Noah lives 350 years after flood
+Genesis 9 → total lifespan 950 years
+Genesis 9 → and he died
+```
+
+so the explicit arithmetic is:
+
+```math
+\boxed{600+350=950}
+```
+
+This is cross-chapter record completion, not a new chronological theory.
+
+## Persistent relations
+
+Genesis 9 is the first chapter where several relations explicitly extend beyond the immediate actors and present state.
+
+Useful fields include:
+
+```text
+current addressee
+future descendants included
+living-creature classes included
+world/earth scope
+non-recurrence content
+perpetual-generation language
+recurring sign/token
+```
+
+The legibility-first question is not yet what the covenant ultimately means, but:
+
+```math
+\boxed{\textbf{What persists, for whom, and according to what explicit wording?}}
+```
 
 ## Machine-readable layer
 
