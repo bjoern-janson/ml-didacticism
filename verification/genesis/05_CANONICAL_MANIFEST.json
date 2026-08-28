@@ -1,0 +1,12 @@
+{
+  "all_text_kjv_sha256_verified": true,
+  "artifact": "verification/genesis/05_CANONICAL_RECORDS.jsonl",
+  "artifact_sha256": "b7cba0d5f81c3c2fe6533539d8c0cc34b9c44758f12ca113830cb4cc6972794b",
+  "first_id": "GEN.5.1",
+  "last_id": "GEN.5.32",
+  "purpose": "canonical Genesis 5 substrate slice; no structural interpretation",
+  "schema_version": 1,
+  "source_corpus": "corpus/kjv.jsonl",
+  "source_corpus_sha256": "b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc",
+  "verse_count": 32
+}
