@@ -1,0 +1,35 @@
+{
+  "status": "FROZEN_UNSCORED",
+  "artifact": "heldout/genesis/05_P5_RAW_PARSE.md",
+  "artifact_sha256": "aa192ade2f0c791f3ac360e43aa42341374853ce4976d7cc16090b055e419796",
+  "creation_commit": "b67c6d11c35af0de2347bfa1538f2e06c71f1cc6",
+  "decoder": {
+    "artifact": "decoder/D1.md",
+    "blob_sha": "4c1a36da5f5e8b59606a1d2fdbdda010c4dbe62f",
+    "sha256": "b5b50e58b43602de61ca4c35fe38fbc45518ea46ddcaaed1f36cb6e31f8ff12a"
+  },
+  "substrate": {
+    "artifact": "verification/genesis/05_CANONICAL_RECORDS.jsonl",
+    "blob_sha": "557143cd2f72c2f3bb19f8337bc0a4c98299e02c",
+    "sha256": "b7cba0d5f81c3c2fe6533539d8c0cc34b9c44758f12ca113830cb4cc6972794b",
+    "first_id": "GEN.5.1",
+    "last_id": "GEN.5.32",
+    "verse_count": 32,
+    "source_corpus": "corpus/kjv.jsonl",
+    "source_corpus_sha256": "b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc",
+    "canonical_manifest": "verification/genesis/05_CANONICAL_MANIFEST.json",
+    "canonical_manifest_blob_sha": "660523dbcbdcfa54332ce0897df3c4902e375982"
+  },
+  "invariants": {
+    "parse_generated_before_scoring": true,
+    "parse_scored_before_freeze": false,
+    "decoder_revision_during_generation": false,
+    "decoder_revision_after_generation_before_freeze": false,
+    "parse_path_must_not_be_updated": true,
+    "repository_inputs_restricted_to": [
+      "decoder/D1.md",
+      "verification/genesis/05_CANONICAL_RECORDS.jsonl",
+      "verification/genesis/05_CANONICAL_MANIFEST.json"
+    ]
+  }
+}
