@@ -107,6 +107,12 @@ Do not strengthen a weak textual relation into a stronger claim merely because t
 
 `OPEN` is useful when a distinction matters but the text does not settle it. It is not a requirement to formalize every uncertainty or a substitute for ordinary reading.
 
+A useful operational rule is:
+
+```math
+\boxed{\textbf{Describe the transitions before explaining them.}}
+```
+
 ## Source status
 
 Pinned upstream source:
@@ -149,12 +155,13 @@ The main project path is now the chapter-by-chapter structural reading itself:
 - [`genesis/01_GENESIS_01.md`](genesis/01_GENESIS_01.md) — world construction, distinction, naming, relation, evaluation.
 - [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — environment, agent, role, permission/constraint, prospective consequence.
 - [`genesis/03_GENESIS_03.md`](genesis/03_GENESIS_03.md) — competing claims, evaluation, action, state change, inquiry, attribution, consequences, access restriction.
+- [`genesis/04_GENESIS_04.md`](genesis/04_GENESIS_04.md) — offerings, differential evaluation, anger/countenance change, warning, killing, inquiry, changed ground relation, future-risk prediction, protection, lineage, differentiated practices.
 
 The point is not to force a universal schema across chapters. Each chapter should be made legible on its own terms first, then compared with earlier material only where that comparison is genuinely useful.
 
 ## Current Genesis progression
 
-A deliberately simple compression of the first three chapters is:
+A deliberately simple compression of the first four chapters is:
 
 ```text
 Genesis 1
@@ -181,6 +188,18 @@ Genesis 3
     → inquiry / attribution
     → changed conditions
     → removal / access restriction
+
+Genesis 4
+  parallel offerings
+    → differential evaluation
+    → anger / visible response
+    → inquiry / warning
+    → killing
+    → inquiry / claimed ignorance
+    → changed ground relation / wandering
+    → future-risk prediction
+    → protective constraint
+    → settlement / lineage / differentiated practices
 ```
 
 These are reading aids, not claims that the chapters reduce to state machines.
