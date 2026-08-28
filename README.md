@@ -156,12 +156,14 @@ The main project path is now the chapter-by-chapter structural reading itself:
 - [`genesis/02_GENESIS_02.md`](genesis/02_GENESIS_02.md) — environment, agent, role, permission/constraint, prospective consequence.
 - [`genesis/03_GENESIS_03.md`](genesis/03_GENESIS_03.md) — competing claims, evaluation, action, state change, inquiry, attribution, consequences, access restriction.
 - [`genesis/04_GENESIS_04.md`](genesis/04_GENESIS_04.md) — offerings, differential evaluation, anger/countenance change, warning, killing, inquiry, changed ground relation, future-risk prediction, protection, lineage, differentiated practices.
+- [`genesis/05_GENESIS_05.md`](genesis/05_GENESIS_05.md) — genealogical template, temporal record structure, instance alignment, localized deviations, Noah prospective statement.
+- [`genesis/06_GENESIS_06.md`](genesis/06_GENESIS_06.md) — population state, evaluation, regret/grief attribution, stated destruction, Noah distinction, earth corruption/violence, ark specification, preservation, compliance.
 
 The point is not to force a universal schema across chapters. Each chapter should be made legible on its own terms first, then compared with earlier material only where that comparison is genuinely useful.
 
 ## Current Genesis progression
 
-A deliberately simple compression of the first four chapters is:
+A deliberately simple compression of the first six chapters is:
 
 ```text
 Genesis 1
@@ -200,6 +202,26 @@ Genesis 4
     → future-risk prediction
     → protective constraint
     → settlement / lineage / differentiated practices
+
+Genesis 5
+  origin / likeness preamble
+    → repeated genealogical record
+    → aligned temporal instances
+    → localized deviations
+    → Noah future-oriented statement
+    → open continuation
+
+Genesis 6
+  population / social state
+    → population-level evaluation
+    → regret / grief attribution
+    → stated destructive decision
+    → Noah distinguished
+    → earth corruption / violence
+    → ark construction specification
+    → destruction + preservation branches
+    → resource provisioning
+    → reported compliance
 ```
 
 These are reading aids, not claims that the chapters reduce to state machines.
