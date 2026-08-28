@@ -31,6 +31,11 @@ For the final `OPEN`/admission refinement, also read:
 - [`../transport/t10/ADMISSION_GATE_CHALLENGE_INTERFACE_COMPOSITION.md`](../transport/t10/ADMISSION_GATE_CHALLENGE_INTERFACE_COMPOSITION.md)
 - [`../transport/t10/FOSSIL_OPEN_EPISTEMIC_LICENSE.md`](../transport/t10/FOSSIL_OPEN_EPISTEMIC_LICENSE.md)
 
+For the first explicitly post-boundary OPEN research question, read:
+
+- [`../frontier/README.md`](../frontier/README.md)
+- [`../frontier/00_CORRECTION_LOCAL_EPISTEMIC_COMPOUNDING.md`](../frontier/00_CORRECTION_LOCAL_EPISTEMIC_COMPOUNDING.md)
+
 ---
 
 ## Current canonical research path
@@ -64,6 +69,9 @@ transport/MILESTONE_T1_T9.md
     ↓
 transport/t10/*
   Level-3 invention boundary, contamination audit, admission gates
+    ↓
+frontier/*
+  precisely specified OPEN questions generated downstream of the boundary
 ```
 
 The frozen architecture is:
@@ -85,6 +93,14 @@ T1–T9      PASS           reconstruction / transport
 T10.001    CONTAMINATED   family + constructor leakage
 T10.002    UNSTARTED      no independently admitted constructor/corpus
 ```
+
+Current post-boundary frontier status:
+
+```math
+\boxed{OPEN(\text{scope/condition-aware, triggerable, warrant-selective epistemic compounding})}
+```
+
+That frontier status is not an experimental verdict.
 
 ---
 
@@ -214,6 +230,48 @@ The successor protocol requires independent answer-family and constructor isolat
 
 ---
 
+## What the frontier directory is
+
+[`../frontier/`](../frontier/) is explicitly downstream of the frozen architecture and executed transport history.
+
+Its repository-level type is:
+
+```math
+\boxed{\textbf{derived question}\neq\textbf{frozen evidence}\neq\textbf{experimental result}.}
+```
+
+The first-class frontier invariant is:
+
+```math
+\boxed{\textbf{A frontier artifact may become more precise without becoming more confirmed.}}
+```
+
+A frontier artifact may preserve formal constructs, failure witnesses, candidate benchmark shapes, admission conditions, and falsification conditions. It may not promote its hypotheses merely because their formalization becomes detailed.
+
+The first frontier artifact is [`../frontier/00_CORRECTION_LOCAL_EPISTEMIC_COMPOUNDING.md`](../frontier/00_CORRECTION_LOCAL_EPISTEMIC_COMPOUNDING.md).
+
+Its central non-collapse is:
+
+```math
+\boxed{
+\textbf{detect insufficiency}
+\neq
+\textbf{identify repair}
+\neq
+\textbf{execute repair}
+\neq
+\textbf{validate improvement}.
+}
+```
+
+Its current status remains `OPEN`. No experiment is admitted by the existence of the frontier document.
+
+```math
+\boxed{\text{specified}\neq\text{admitted}\neq\text{executed}\neq\text{validated}.}
+```
+
+---
+
 ## Earlier / historical scaffolding
 
 Several directories predate the current Genesis 1–50 → AG/1 → transport program boundary.
@@ -308,6 +366,12 @@ A_{new}
 
 with the evidence causing any transition preserved explicitly.
 
+The frontier does not weaken this rule. It adds a place for downstream questions whose answers remain unearned.
+
+```math
+\boxed{\texttt{frontier/}\not\Rightarrow\texttt{evidence}.}
+```
+
 ---
 
 ## New-reader claim ceiling
@@ -328,8 +392,15 @@ AG/1 is uniquely minimal.
 AG/1 is already proven useful as an engineering system.
 Level-3 structural invention has been demonstrated.
 T10.002 is merely waiting to be run.
+Correction-local epistemic compounding has been demonstrated.
+Corrigibility debt or self-sealing abstraction has been empirically established.
+Any frontier benchmark has been admitted, executed, or validated.
 ```
 
-The Level-3 boundary remains `OPEN`, and `T10.002` remains `UNSTARTED` until an independent admission is actually earned.
+The Level-3 boundary remains `OPEN`, `T10.002` remains `UNSTARTED`, and the correction-local compounding frontier remains `OPEN` until independent evidence actually earns a stronger transition.
+
+```math
+\boxed{\textbf{More precision}\neq\textbf{more evidence}.}
+```
 
 **Decode the book.**
