@@ -1,0 +1,130 @@
+name: Freeze P3 held-out parse
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - heldout/genesis/03_P3_RAW_PARSE.md
+      - .github/workflows/freeze-p3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify frozen D1 and canonical corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_d1="b5b50e58b43602de61ca4c35fe38fbc45518ea46ddcaaed1f36cb6e31f8ff12a"
+          expected_corpus="b4a44c22899b0669f1d504c65a89bee2ac2dd4b08e01c2f012814f348a6ba2dc"
+          actual_d1="$(sha256sum decoder/D1.md | awk '{print $1}')"
+          actual_corpus="$(sha256sum corpus/kjv.jsonl | awk '{print $1}')"
+          test "$actual_d1" = "$expected_d1"
+          test "$actual_corpus" = "$expected_corpus"
+
+      - name: Verify canonical Genesis 3 input and write P3 manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          from pathlib import Path
+
+          corpus = Path("corpus/kjv.jsonl")
+          p3 = Path("heldout/genesis/03_P3_RAW_PARSE.md")
+          d1 = Path("decoder/D1.md")
+          out = Path("heldout/genesis/03_P3_MANIFEST.json")
+
+          records = []
+          with corpus.open("r", encoding="utf-8") as f:
+              for line in f:
+                  if not line.strip():
+                      continue
+                  rec = json.loads(line)
+                  if rec.get("book") == "Genesis" and rec.get("chapter") == 3:
+                      records.append(rec)
+
+          expected_ids = [f"GEN.3.{i}" for i in range(1, 25)]
+          ids = [r.get("id") for r in records]
+          if ids != expected_ids:
+              raise SystemExit(f"Genesis 3 ID mismatch: {ids!r}")
+
+          for i, rec in enumerate(records, start=1):
+              text = rec.get("text_kjv")
+              source = rec.get("source")
+              if not isinstance(text, str) or not isinstance(source, dict):
+                  raise SystemExit(f"Malformed canonical record GEN.3.{i}")
+              actual = hashlib.sha256(text.encode("utf-8")).hexdigest()
+              expected = source.get("text_kjv_sha256")
+              if actual != expected:
+                  raise SystemExit(f"Verse hash mismatch GEN.3.{i}")
+
+          slice_payload = "".join(
+              json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n"
+              for r in records
+          ).encode("utf-8")
+
+          sha256 = lambda b: hashlib.sha256(b).hexdigest()
+          git_blob = lambda path: subprocess.check_output(
+              ["git", "hash-object", str(path)], text=True
+          ).strip()
+          creation_commit = subprocess.check_output(
+              ["git", "log", "--diff-filter=A", "--format=%H", "--", str(p3)],
+              text=True,
+          ).splitlines()[0]
+
+          manifest = {
+              "artifact": str(p3),
+              "artifact_git_blob": git_blob(p3),
+              "artifact_sha256": sha256(p3.read_bytes()),
+              "creation_commit": creation_commit,
+              "decoder": {
+                  "artifact": str(d1),
+                  "git_blob": git_blob(d1),
+                  "sha256": sha256(d1.read_bytes()),
+                  "version": "D1",
+              },
+              "held_out_input": {
+                  "canonical_slice_sha256": sha256(slice_payload),
+                  "first_id": expected_ids[0],
+                  "last_id": expected_ids[-1],
+                  "source_corpus": str(corpus),
+                  "source_corpus_sha256": sha256(corpus.read_bytes()),
+                  "verse_count": len(records),
+                  "all_text_kjv_sha256_verified": True,
+              },
+              "parse": "P3",
+              "schema_version": 1,
+              "scoring_status": "NOT_RUN",
+              "status": "FROZEN_UNSCORED",
+              "decoder_revision_status": "NOT_PERMITTED_DURING_HELD_OUT_RUN",
+              "invariant": "Genesis 3 may falsify D1 but cannot train D1.",
+          }
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
+
+      - name: Commit P3 freeze manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add heldout/genesis/03_P3_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo "P3 freeze manifest already current."
+            exit 0
+          fi
+          git commit -m "Freeze P3 held-out parse provenance"
+          git push
