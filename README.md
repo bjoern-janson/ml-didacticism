@@ -6,7 +6,7 @@ A structural reading project for the King James Bible (KJV) whose primary goal i
 \boxed{\textbf{make the text legible to modern humans and machines before interpreting it}}
 ```
 
-The project uses state, action, relation, representation, information, provenance, sequence, consequence, timing, quantity, and other machine-friendly structural language as an analytic lens.
+The project uses state, action, relation, representation, information, provenance, sequence, consequence, timing, quantity, observation, and other machine-friendly structural language as an analytic lens.
 
 It is **not** a theological replacement, doctrinal paraphrase, or claim that biblical authors intended modern ML concepts.
 
@@ -49,6 +49,7 @@ Sequence
 Consequences
 Temporal markers
 Quantities
+Observations / probes
 Repeated patterns
 Uncertainties
 ```
@@ -93,6 +94,8 @@ what happened afterward
 what source or reason was attributed
 what relations persisted or changed
 what timing or quantity was explicitly supplied
+what was observed or checked
+what interpretation of an observation was explicitly stated
 ```
 
 Do not strengthen a weak textual relation into a stronger claim merely because the stronger claim would make a cleaner theory.
@@ -162,12 +165,13 @@ The main project path is the chapter-by-chapter structural reading itself:
 - [`genesis/05_GENESIS_05.md`](genesis/05_GENESIS_05.md) — genealogical template, temporal record structure, instance alignment, localized deviations, Noah prospective statement.
 - [`genesis/06_GENESIS_06.md`](genesis/06_GENESIS_06.md) — population state, evaluation, regret/grief attribution, stated destruction, Noah distinction, earth corruption/violence, ark specification, preservation, compliance.
 - [`genesis/07_GENESIS_07.md`](genesis/07_GENESIS_07.md) — entry, specification refinement, event-time indexing, flood realization, environmental escalation, destruction, preserved subset, persistent water state.
+- [`genesis/08_GENESIS_08.md`](genesis/08_GENESIS_08.md) — environmental reversal, progressive recovery, repeated probes, explicit observation-to-knowledge relation, delayed release, re-entry, offering, post-flood future statements.
 
 The point is not to force a universal schema across chapters. Each chapter should be made legible on its own terms first, then compared with earlier material only where that comparison is genuinely useful.
 
 ## Current Genesis progression
 
-A deliberately simple compression of the first seven chapters is:
+A deliberately simple compression of the first eight chapters is:
 
 ```text
 Genesis 1
@@ -237,6 +241,20 @@ Genesis 7
     → destruction outside preservation structure
     → surviving ark subset
     → waters prevail for 150 days
+
+Genesis 8
+  sustained water state
+    → environmental reversal
+    → ark rests / terrain reappears
+    → raven + repeated dove probes
+    → changed probe results
+    → explicit `so Noah knew` relation
+    → direct dry-ground observation
+    → further waiting
+    → explicit exit instruction
+    → family / animals re-enter environment
+    → offering
+    → future non-repetition / cycle statements
 ```
 
 These are reading aids, not claims that the chapters reduce to state machines.
@@ -267,16 +285,68 @@ The important distinction remains:
 
 The useful task is to record which structures recur, become events, are refined, or are left unstated later—not to turn the reading into a prediction-accuracy benchmark.
 
-Genesis 7 also introduces enough explicit timing to justify simple timeline representations:
+Genesis 7 → Genesis 8 adds a different cross-chapter pattern:
+
+```math
+\boxed{
+\text{sustained altered state}
+\rightarrow
+\text{progressive recovery}
+\rightarrow
+\text{repeated environmental checks}
+\rightarrow
+\text{release / re-entry}
+}
+```
+
+Genesis 8 also earns two especially useful distinctions:
+
+```math
+\boxed{
+\text{probe result}
+\neq
+\text{explicit interpretation of probe result}
+}
+```
+
+and:
+
+```math
+\boxed{
+\text{evidence of recovery}
+\neq
+\text{authorization to exit}
+}
+```
+
+These are chapter-local structural observations, not universal decision rules imposed on the text.
+
+## Timeline representations
+
+Genesis 7–8 contain enough explicit timing to justify simple timeline representations:
 
 ```text
-waiting interval
-calendar-like event index
+waiting intervals
+calendar-like event indices
 duration markers
 quantitative state markers
+recovery checkpoints
+repeated probe intervals
 ```
 
 These should be preserved where explicit without manufacturing chronology the text does not itself supply.
+
+The key discipline is:
+
+```math
+\boxed{
+\text{time marker}
+\rightarrow
+\text{the exact event/state it modifies}
+}
+```
+
+before attempting larger chronological synthesis.
 
 ## Machine-readable layer
 
