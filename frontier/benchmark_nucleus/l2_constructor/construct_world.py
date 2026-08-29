@@ -130,7 +130,7 @@ def build_world(seed: int, scenario: str) -> dict:
         defeater = {
             "condition": "diagnostic_channel_clear",
             "new_value": False,
-            "evidence": "Post-run audit shows the diagnostic channel was noisy; that channel was operational only."
+            "evidence": "Post-run audit shows the diagnostic channel was noisy during the recorded event."
         }
     else:
         raise ValueError(f"unknown scenario: {scenario}")
@@ -159,7 +159,6 @@ def learner_projection(world: dict) -> dict:
         "schema": "l2_learner_view_v0",
         "status": world["status"],
         "seed": world["seed"],
-        "scenario": world["scenario"],
         "protocol": {
             "operator_semantics": world["reference_operator_semantics"],
             "task": (
