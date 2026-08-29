@@ -1,3 +1,7 @@
+> **HISTORICAL — superseded by [CAPITAL_FOR_MACHINES.md](CAPITAL_FOR_MACHINES.md).** Preserved for research lineage; not the canonical reader edition.
+
+---
+
 # CAPITAL FOR MACHINES
 
 ## On the Production, Accumulation, and Correction of Reasons
