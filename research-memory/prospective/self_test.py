@@ -42,8 +42,8 @@ def main() -> int:
     assert verify_freeze(frozen), "post-freeze selection mutated the frozen history"
 
     expected_now = frozen["present_outputs"]
-    b_exact = []
-    b_nonexact = []
+    b_action_hits = []
+    b_action_misses = []
 
     # Test each constructor-side audit family directly against the same frozen history.
     for c in candidates:
@@ -60,20 +60,24 @@ def main() -> int:
         c_pred = WarrantLineageMemory(world).reassess(world["defeater_visible"])
         assert score(gold, c_pred)["exact"], c["family"]
 
+        # B may choose the correct correction action without reconstructing the
+        # strict warrant-path explanation it does not store. Preserve that
+        # distinction rather than treating missing paths as whole-output exactness.
         b_pred = SourceProvenanceMemory(world).reassess(world["defeater_visible"])
-        if score(gold, b_pred)["exact"]:
-            b_exact.append(c["family"])
+        if score(gold, b_pred)["action_exact"]:
+            b_action_hits.append(c["family"])
         else:
-            b_nonexact.append(c["family"])
+            b_action_misses.append(c["family"])
 
-    assert b_exact, "B should be sufficient on at least one prospective correction"
-    assert b_nonexact, "B should be insufficient on at least one prospective correction"
+    assert b_action_hits, "B should choose the correct action on at least one prospective correction"
+    assert b_action_misses, "B should fail the correction action on at least one prospective correction"
 
     print(
         "PASS: history contains no future defeater; freeze digest remains stable; "
         "multiple correction families can be selected only after freeze; A/B/C share "
-        "the same pre-defeater outputs; C matches evaluator gold as engineering upper bound; "
-        "B is sufficient on some post-freeze corrections and insufficient on others."
+        "the same pre-defeater outputs; C matches strict evaluator gold as engineering "
+        "upper bound; B is mixed at the correction-action level while strict path "
+        "reconstruction remains separately scored."
     )
     return 0
 
