@@ -1,0 +1,54 @@
+{
+  "id": "C001_TRANSFORMATION_INSTANCE_DEFEAT",
+  "status": "TOY_UNADMITTED",
+  "purpose": "Test transformation-instance correction locality under an independently specified applicability defeater.",
+  "claims": {
+    "K1": {"initial_status": "WARRANTED"},
+    "K2": {"initial_status": "WARRANTED"},
+    "K3": {"initial_status": "WARRANTED"},
+    "K4": {"initial_status": "WARRANTED"},
+    "K5": {"initial_status": "WARRANTED"},
+    "K7": {"initial_status": "WARRANTED"},
+    "K8": {"initial_status": "WARRANTED"},
+    "K9": {"initial_status": "WARRANTED"},
+    "K10": {"initial_status": "WARRANTED"},
+    "K11": {"initial_status": "WARRANTED"}
+  },
+  "transformation_instances": {
+    "tau_A": {"operator": "combine_v1", "inputs": ["K1", "K2"], "output": "K3", "condition": "C_A", "scope": "S_A", "realized": true, "authority_active_initially": true},
+    "tau_B": {"operator": "independent_support", "inputs": ["K7"], "output": "K3", "condition": "C_B", "scope": "S_B", "realized": true, "authority_active_initially": true},
+    "tau_C": {"operator": "derive_downstream", "inputs": ["K3"], "output": "K4", "condition": "C_C", "scope": "S_C", "realized": true, "authority_active_initially": true},
+    "tau_D": {"operator": "independent_support", "inputs": ["K8"], "output": "K4", "condition": "C_D", "scope": "S_D", "realized": true, "authority_active_initially": true},
+    "tau_E": {"operator": "derive_path_specific", "inputs": ["K3"], "output": "K5", "condition": "C_E", "scope": "S_E", "realized": true, "authority_active_initially": true},
+    "tau_F": {"operator": "combine_v1", "inputs": ["K9", "K10"], "output": "K11", "condition": "C_F", "scope": "S_F", "realized": true, "authority_active_initially": true}
+  },
+  "warrant_paths_initial": {
+    "K3": [["tau_A"], ["tau_B"]],
+    "K4": [["tau_A", "tau_C"], ["tau_B", "tau_C"], ["tau_D"]],
+    "K5": [["tau_A", "tau_E"]],
+    "K11": [["tau_F"]]
+  },
+  "defeater": {
+    "target_instance": "tau_A",
+    "kind": "APPLICABILITY",
+    "finding": "NOT_APPLICABLE",
+    "does_not_defeat": ["K1", "K2", "K3", "operator:combine_v1", "tau_F"]
+  },
+  "gold_post_defeater": {
+    "transformation_instances": {
+      "tau_A": {"realized": true, "authority_active": false},
+      "tau_B": {"realized": true, "authority_active": true},
+      "tau_C": {"realized": true, "authority_active": true},
+      "tau_D": {"realized": true, "authority_active": true},
+      "tau_E": {"realized": true, "authority_active": true},
+      "tau_F": {"realized": true, "authority_active": true}
+    },
+    "warrant_paths_active": {
+      "K3": [["tau_B"]],
+      "K4": [["tau_B", "tau_C"], ["tau_D"]],
+      "K5": [],
+      "K11": [["tau_F"]]
+    },
+    "claim_status": {"K3": "RETAIN", "K4": "RETAIN", "K5": "REOPEN", "K11": "RETAIN"}
+  }
+}
