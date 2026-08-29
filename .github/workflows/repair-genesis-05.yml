@@ -1,0 +1,38 @@
+name: Repair Genesis 5 custody
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/repair_genesis_05_custody.py
+      - .github/workflows/repair-genesis-05.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Re-derive Genesis 5 custody artifacts
+        run: python scripts/repair_genesis_05_custody.py
+
+      - name: Commit repaired custody artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add verification/genesis/05_CANONICAL_RECORDS.jsonl \
+                  verification/genesis/05_CANONICAL_MANIFEST.json \
+                  heldout/genesis/05_P5_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo "Genesis 5 custody artifacts already canonical."
+            exit 0
+          fi
+          git commit -m "Repair Genesis 5 custody metadata"
+          git push
