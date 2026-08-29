@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330" role="img" aria-labelledby="title desc">
   <title id="title">Warrant and computation edges in the defeater example</title>
-  <desc id="desc">Independent support and transformation tau one warrant K four. K four computationally produces K six. Tau one warrants K five. Defeating tau one does not automatically defeat K four or K six.</desc>
+  <desc id="desc">Independent support and transformation tau one warrant K four. K four computationally produces K six. An independent confirmation also warrants K six. Tau one warrants K five. Defeating tau one does not automatically defeat K four, K five, or K six.</desc>
   <defs>
     <marker id="arrow-solid" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#1d2733"/>
@@ -26,6 +26,10 @@
   <path d="M395 104 H700" class="dashed"/>
   <text x="720" y="112" class="node">K₆</text>
   <text x="500" y="88" class="small">computation</text>
+
+  <circle cx="450" cy="190" r="9" fill="#ffffff" stroke="#1d2733" stroke-width="3"/>
+  <path d="M460 190 C535 190 640 150 700 122" class="solid"/>
+  <text x="470" y="220" class="small">independent confirmation</text>
 
   <text x="350" y="270" class="node">τ₁</text>
   <path d="M375 252 V132" class="solid"/>
