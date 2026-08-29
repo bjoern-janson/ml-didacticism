@@ -2,19 +2,58 @@
 """Instrument tests for the research-memory engineering prototype."""
 from __future__ import annotations
 
+from copy import deepcopy
+
 from model import derive_gold
 from policies import DependencyOnlyMemory, SourceProvenanceMemory, WarrantLineageMemory
 from scenarios import get
 from evaluate import score
 
 
+CASES = [
+    "alternate_support",
+    "sole_support",
+    "scope_only",
+    "operational_null",
+    "instance_not_operator",
+    "operator_invalid",
+    "route_locked",
+]
+
+
 def main() -> int:
     alt = get("alternate_support")
     gold_alt = derive_gold(alt)
     c_alt = WarrantLineageMemory(alt).reassess(alt["defeater_visible"])
-    assert score(gold_alt, c_alt)["exact"]
+    alt_score = score(gold_alt, c_alt)
+    assert alt_score["exact"]
     assert "K3" in c_alt["retained_claims"]
     assert any(x["claim"] == "K3" for x in c_alt["removed_warrant_paths"])
+
+    # Regression: false retained claims must reduce preservation quality.
+    false_retained = deepcopy(c_alt)
+    false_retained["retained_claims"].append("K999")
+    s = score(gold_alt, false_retained)
+    assert s["I_P"] < 1.0
+    assert s["retained_precision"] < 1.0
+    assert not s["exact"]
+
+    # Regression: invented history must reduce historical-preservation quality.
+    false_history = deepcopy(c_alt)
+    false_history["preserved_history"].append("tau_extra")
+    s = score(gold_alt, false_history)
+    assert s["H_P"] < 1.0
+    assert s["history_precision"] < 1.0
+    assert not s["exact"]
+
+    # Regression: correct action with missing warrant paths is not strict exactness.
+    missing_paths = deepcopy(c_alt)
+    missing_paths["removed_warrant_paths"] = []
+    s = score(gold_alt, missing_paths)
+    assert s["action_exact"]
+    assert not s["paths_exact"]
+    assert s["removed_path_recall"] == 0.0
+    assert not s["exact"]
 
     sole = get("sole_support")
     c_sole = WarrantLineageMemory(sole).reassess(sole["defeater_visible"])
@@ -52,25 +91,30 @@ def main() -> int:
     assert "K4" in c_route["retained_claims"]
 
     failures_a = 0
-    failures_b = 0
-    for name in [
-        "alternate_support", "sole_support", "scope_only", "operational_null",
-        "instance_not_operator", "operator_invalid", "route_locked"
-    ]:
+    b_action_hits = []
+    b_action_misses = []
+    for name in CASES:
         w = get(name)
         g = derive_gold(w)
-        if not score(g, DependencyOnlyMemory(w).reassess(w["defeater_visible"]))["exact"]:
+        a_score = score(g, DependencyOnlyMemory(w).reassess(w["defeater_visible"]))
+        b_score = score(g, SourceProvenanceMemory(w).reassess(w["defeater_visible"]))
+        c_score = score(g, WarrantLineageMemory(w).reassess(w["defeater_visible"]))
+        assert c_score["exact"], name
+        if not a_score["action_exact"]:
             failures_a += 1
-        if not score(g, SourceProvenanceMemory(w).reassess(w["defeater_visible"]))["exact"]:
-            failures_b += 1
+        if b_score["action_exact"]:
+            b_action_hits.append(name)
+        else:
+            b_action_misses.append(name)
+
     assert failures_a >= 1
-    assert failures_b >= 1
+    assert b_action_hits, "B should choose the correct correction action on at least one case"
+    assert b_action_misses, "B should fail the correction action on at least one case"
 
     print(
-        "PASS: warrant-lineage policy matches gold across paired cases; "
-        "alternate support, sole support, scope narrowing, operational null, "
-        "instance/operator separation, operator invalidity, and route-locked propagation "
-        "are discriminated; cheaper baselines fail at least one case."
+        "PASS: strict evaluator penalizes false retention/history and missing warrant paths; "
+        "warrant-lineage policy matches strict gold across paired cases; cheaper baselines "
+        "remain mixed at the action level rather than being preordained winners or losers."
     )
     return 0
 
