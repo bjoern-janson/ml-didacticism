@@ -48,6 +48,7 @@ gold active warrant paths
 gold affected-authority set
 gold authority-active flags
 gold defeater locus
+hidden scenario label
 ```
 
 Instead it contains a synthetic event/procedure history, pre-defeater observations, operator semantics, and a new defeater observation.
@@ -96,6 +97,18 @@ The `reason_edges` requirement protects:
 ```
 
 A learner must expose whether it thinks the defeater attacked an application, an authority path, or no epistemic authority at all.
+
+The gold also keeps two different objects separate:
+
+```math
+\boxed{
+\text{direct defeater locus}
+\neq
+\text{full affected authority-instance set}.
+}
+```
+
+A directly invalidated application can remove authority from a later provenance-locked transformation even when that later instance was not itself the direct target of the new evidence.
 
 ## Two constructor scenarios
 
@@ -193,7 +206,7 @@ python frontier/benchmark_nucleus/l2_constructor/self_test.py
 Expected:
 
 ```text
-PASS: constructor projects learner observations without gold authority fields; application-local oracle passes; undercorrection/globalization fail; null HOLD/RETAIN passes and overreaction fails.
+PASS: learner projection hides scenario/gold authority fields; direct defeater locus is separated from full affected authority set; application-local oracle passes; undercorrection/globalization fail; null RETAIN passes and overreaction fails.
 ```
 
 ## Why this is still not admitted L2
