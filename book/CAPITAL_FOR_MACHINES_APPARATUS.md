@@ -10,7 +10,7 @@ The apparatus does not replace the reader text and does not authorize stronger c
 
 The reader object is:
 
-- [Cold-reader packet](CAPITAL_FOR_MACHINES_COLD_READER_PACKET.md)
+- [Cold-reader packet](CAPITAL_FOR_MACHINES.md)
 
 The packet is a literary and argumentative object. Its scenes are not, by themselves, experimental evidence. Understanding a scene, reconstructing its mechanism, or finding it persuasive does not establish that the underlying claim is true.
 
@@ -120,10 +120,10 @@ The provenance edition records claim-to-artifact paths and identifies remaining 
 
 ## 6. Inspection routes
 
-- [Content-frozen cold-reader packet](CAPITAL_FOR_MACHINES_COLD_READER_PACKET.md)
+- [Content-frozen cold-reader packet](CAPITAL_FOR_MACHINES.md)
 - [Cold-reader prompt](CAPITAL_FOR_MACHINES_COLD_READER_PROMPT.md)
 - [Narrative consequence draft](CAPITAL_FOR_MACHINES_BOOK_CONSEQUENCE.md)
-- [Audited technical edition](CAPITAL_FOR_MACHINES.md)
+- [Audited technical edition](CAPITAL_FOR_MACHINES_TECHNICAL.md)
 - [V0.3.1 provenance audit](CAPITAL_FOR_MACHINES_V0.3.1_PROVENANCE_AUDIT.md)
 - [Machine-readable provenance nodes](CAPITAL_FOR_MACHINES_V0.3.1_PROVENANCE_NODES.jsonl)
 - [Figure 1](CAPITAL_FOR_MACHINES_FIGURE_01.svg)
