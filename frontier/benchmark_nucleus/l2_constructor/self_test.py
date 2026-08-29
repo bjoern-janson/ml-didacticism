@@ -10,6 +10,7 @@ from score_l2 import score
 
 
 FORBIDDEN_VIEW_KEYS = {
+    "scenario",
     "gold_post_defeater",
     "active_warrant_paths",
     "active_authority_instances",
@@ -31,7 +32,7 @@ def oracle_from_gold(g: dict) -> dict:
 
 def assert_view_firewall(view: dict) -> None:
     overlap = FORBIDDEN_VIEW_KEYS & set(view)
-    assert not overlap, f"learner view leaks gold keys: {sorted(overlap)}"
+    assert not overlap, f"learner view leaks gold/answer-shaped keys: {sorted(overlap)}"
 
 
 def main() -> int:
@@ -40,19 +41,20 @@ def main() -> int:
     gold = derive_gold(world)
     assert_view_firewall(view)
 
+    direct = set(gold["defeater_locus"]["target_instances"])
+    affected = set(gold["affected_authority_instances"])
+    assert direct < affected, "case must include authority loss beyond the direct defeater locus"
+
     oracle = oracle_from_gold(gold)
     assert score(gold, oracle)["pass"]
 
     bad_under = json.loads(json.dumps(oracle))
-    bad_under["affected_authority_instances"] = []
+    bad_under["affected_authority_instances"] = list(direct)
     assert not score(gold, bad_under)["pass"]
 
     bad_global = json.loads(json.dumps(oracle))
-    same_op = [
-        e["id"] for e in world["events"]
-        if e["operator"] == "combine_v1"
-    ]
-    target = gold["affected_authority_instances"][0]
+    same_op = [e["id"] for e in world["events"] if e["operator"] == "combine_v1"]
+    target = next(iter(direct))
     control = next(t for t in same_op if t != target)
     control_output = next(e["output"] for e in world["events"] if e["id"] == control)
     bad_global["claim_actions"][control_output] = "REOPEN"
@@ -72,9 +74,10 @@ def main() -> int:
     assert not score(null_gold, bad_null)["pass"]
 
     print(
-        "PASS: constructor projects learner observations without gold authority fields; "
+        "PASS: learner projection hides scenario/gold authority fields; "
+        "direct defeater locus is separated from full affected authority set; "
         "application-local oracle passes; undercorrection/globalization fail; "
-        "null HOLD/RETAIN passes and overreaction fails."
+        "null RETAIN passes and overreaction fails."
     )
     return 0
 
