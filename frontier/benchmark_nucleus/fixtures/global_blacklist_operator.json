@@ -1,0 +1,18 @@
+{
+  "case_id": "C001_TRANSFORMATION_INSTANCE_DEFEAT",
+  "transformation_instances": {
+    "tau_A": {"realized": true, "authority_active": false},
+    "tau_B": {"realized": true, "authority_active": true},
+    "tau_C": {"realized": true, "authority_active": true},
+    "tau_D": {"realized": true, "authority_active": true},
+    "tau_E": {"realized": true, "authority_active": true},
+    "tau_F": {"realized": true, "authority_active": false}
+  },
+  "warrant_paths_active": {
+    "K3": [["tau_B"]],
+    "K4": [["tau_B", "tau_C"], ["tau_D"]],
+    "K5": [],
+    "K11": []
+  },
+  "claim_status": {"K3": "RETAIN", "K4": "RETAIN", "K5": "REOPEN", "K11": "REOPEN"}
+}
