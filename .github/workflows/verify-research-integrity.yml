@@ -1,0 +1,48 @@
+name: Verify research integrity
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - corpus/kjv.jsonl
+      - verification/genesis/**
+      - heldout/genesis/**
+      - scripts/check_canonical_slices.py
+      - research-memory/**
+      - frontier/benchmark_nucleus/**
+      - .github/workflows/verify-research-integrity.yml
+  pull_request:
+    paths:
+      - corpus/kjv.jsonl
+      - verification/genesis/**
+      - heldout/genesis/**
+      - scripts/check_canonical_slices.py
+      - research-memory/**
+      - frontier/benchmark_nucleus/**
+      - .github/workflows/verify-research-integrity.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify canonical substrate custody
+        run: python scripts/check_canonical_slices.py
+
+      - name: Run research-memory self-test
+        run: python research-memory/self_test.py
+
+      - name: Run prospective research-memory self-test
+        run: python research-memory/prospective/self_test.py
+
+      - name: Run frontier benchmark nucleus self-test
+        run: python frontier/benchmark_nucleus/self_test.py
+
+      - name: Run L2 constructor self-test
+        run: python frontier/benchmark_nucleus/l2_constructor/self_test.py
