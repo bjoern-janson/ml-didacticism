@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330" role="img" aria-labelledby="title desc">
+  <title id="title">Warrant and computation edges in the defeater example</title>
+  <desc id="desc">Independent support and transformation tau one warrant K four. K four computationally produces K six. Tau one warrants K five. Defeating tau one does not automatically defeat K four or K six.</desc>
+  <defs>
+    <marker id="arrow-solid" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1d2733"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#657383"/>
+    </marker>
+    <style>
+      .label { font: 22px Georgia, serif; fill: #17202a; }
+      .node { font: 28px Georgia, serif; font-weight: 600; fill: #17202a; }
+      .small { font: 18px Georgia, serif; fill: #4d5b68; }
+      .solid { stroke: #1d2733; stroke-width: 3; fill: none; marker-end: url(#arrow-solid); }
+      .dashed { stroke: #657383; stroke-width: 3; stroke-dasharray: 9 8; fill: none; marker-end: url(#arrow-dashed); }
+    </style>
+  </defs>
+  <rect width="900" height="330" fill="#ffffff"/>
+  <text x="36" y="42" class="small">Figure 1 — the two kinds of descent</text>
+
+  <text x="40" y="112" class="label">Independent support</text>
+  <path d="M220 104 H330" class="solid"/>
+  <text x="355" y="112" class="node">K₄</text>
+
+  <path d="M395 104 H700" class="dashed"/>
+  <text x="720" y="112" class="node">K₆</text>
+  <text x="500" y="88" class="small">computation</text>
+
+  <text x="350" y="270" class="node">τ₁</text>
+  <path d="M375 252 V132" class="solid"/>
+  <text x="390" y="205" class="small">warrant</text>
+  <path d="M395 260 H700" class="solid"/>
+  <text x="720" y="270" class="node">K₅</text>
+
+  <path d="M40 305 H100" class="solid"/>
+  <text x="115" y="312" class="small">warrant edge</text>
+  <path d="M300 305 H360" class="dashed"/>
+  <text x="375" y="312" class="small">computation edge</text>
+</svg>
+
