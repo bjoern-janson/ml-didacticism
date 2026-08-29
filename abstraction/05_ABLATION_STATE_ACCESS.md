@@ -10,6 +10,11 @@
 **Purpose:** test whether `STATE` and `ACCESS` are primitive architectural elements or derivable views over temporally indexed typed relations and events  
 **Status:** adversarial carrier/semantic ablation pass; no external-domain testing; `EVENT` is explicitly out of scope for this pass
 
+The references below to the `COMMITMENT` and `AUTHORITY` kernels mean the
+provisional semantic residues established by `04`, not commitments that those
+families must remain primitive carriers in the final architecture. The final
+carrier question is settled only by the later joint ablation.
+
 The governing criterion is:
 
 ```math

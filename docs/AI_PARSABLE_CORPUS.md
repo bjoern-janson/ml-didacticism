@@ -188,6 +188,12 @@ If a modern-English rendering is useful later, it must be stored as a separate e
 
 Annotations live in a separate JSONL file keyed by canonical verse `id`.
 
+In the current repository state this is a downstream contract rather than a
+present tracked artifact: `corpus/annotations/mechanical.jsonl` is not included
+in the canonical corpus tree. Its absence must not be interpreted as an empty
+annotation result. A future materialized sidecar requires its own deterministic
+manifest and may be regenerated without changing the source corpus.
+
 Example:
 
 ```json

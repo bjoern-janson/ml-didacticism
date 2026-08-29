@@ -52,6 +52,19 @@ and:
 \boxed{\text{hidden-parameter audit passes}}
 ```
 
+## Terminology boundary: semantic residue versus primitive carrier
+
+In this provisional pass, `IRREDUCIBLE` means that the named semantic
+distinction cannot yet be deleted from the source-earned relation inventory at
+the larger basis then under examination. It does **not** by itself mean that a
+new primitive storage or architectural carrier must survive the final freeze.
+
+The later ablation passes separately ask whether that semantic residue can be
+represented as a constrained, typed relational family over a smaller carrier
+basis. Consequently, the provisional results below may call `COMMITMENT` and
+`AUTHORITY` irreducible kernels while the final pass can still classify their
+families as derivable over `RELATION` and `REPRESENTATION`.
+
 ---
 
 # 0. Anti-cheat rule: hidden-parameter audit

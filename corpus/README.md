@@ -76,6 +76,13 @@ Mechanical annotations are sidecars keyed by canonical verse `id` and exact char
 
 They do **not** copy the matched text. The evidence span is recovered from the referenced canonical verse record.
 
+The sidecar shown in the directory contract is currently a downstream
+contract, not a tracked artifact in this repository. The tracked corpus is
+`kjv.jsonl` plus `MANIFEST.json`; no claim is made that
+`annotations/mechanical.jsonl` has been generated. A future sidecar must have
+its own deterministic manifest and remain independently regenerable from the
+canonical verse records.
+
 ## Boundary
 
 ```math

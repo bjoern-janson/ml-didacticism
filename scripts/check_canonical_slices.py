@@ -15,6 +15,13 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+
+
+def canonical_file_bytes(path: Path) -> bytes:
+    """Read repository text in the LF form used by committed Git blobs."""
+    return path.read_bytes().replace(b"\r\n", b"\n")
+
+
 def git_blob_sha1(data: bytes) -> str:
     header = f"blob {len(data)}\0".encode("ascii")
     return hashlib.sha1(header + data).hexdigest()
@@ -22,7 +29,9 @@ def git_blob_sha1(data: bytes) -> str:
 
 def load_jsonl(path: Path) -> list[dict]:
     records: list[dict] = []
-    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+    for line_number, line in enumerate(
+        canonical_file_bytes(path).decode("utf-8").splitlines(), start=1
+    ):
         if not line.strip():
             continue
         try:
@@ -38,7 +47,7 @@ def require(condition: bool, message: str) -> None:
 
 
 def main() -> int:
-    corpus_bytes = CORPUS.read_bytes()
+    corpus_bytes = canonical_file_bytes(CORPUS)
     corpus_sha = sha256_bytes(corpus_bytes)
     corpus_records = load_jsonl(CORPUS)
     corpus_by_id: dict[str, dict] = {}
@@ -51,14 +60,14 @@ def main() -> int:
     checked_manifests: dict[str, tuple[dict, Path, bytes]] = {}
 
     for manifest_path in sorted(VERIFY_DIR.glob("*_CANONICAL_MANIFEST.json")):
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest = json.loads(canonical_file_bytes(manifest_path).decode("utf-8"))
         artifact_path = Path(manifest["artifact"])
-        artifact_bytes = artifact_path.read_bytes()
+        artifact_bytes = canonical_file_bytes(artifact_path)
         artifact_sha = sha256_bytes(artifact_bytes)
         records = load_jsonl(artifact_path)
 
         require(
-            manifest.get("source_corpus") == str(CORPUS),
+            manifest.get("source_corpus") == CORPUS.as_posix(),
             f"{manifest_path}: unexpected source_corpus",
         )
         require(
@@ -106,21 +115,21 @@ def main() -> int:
                 f"{artifact_path}: {rid} embedded text SHA-256 mismatch",
             )
 
-        checked_manifests[str(manifest_path)] = (manifest, artifact_path, artifact_bytes)
+        checked_manifests[manifest_path.as_posix()] = (manifest, artifact_path, artifact_bytes)
 
     require(checked_manifests, "no canonical Genesis manifests found")
 
     # Validate held-out manifests that explicitly bind to canonical substrate artifacts.
     for heldout_path in sorted(HELDOUT_DIR.glob("*_MANIFEST.json")):
-        heldout = json.loads(heldout_path.read_text(encoding="utf-8"))
+        heldout = json.loads(canonical_file_bytes(heldout_path).decode("utf-8"))
         substrate = heldout.get("substrate")
         if not isinstance(substrate, dict) or "canonical_manifest" not in substrate:
             continue
 
         artifact_path = Path(substrate["artifact"])
-        artifact_bytes = artifact_path.read_bytes()
+        artifact_bytes = canonical_file_bytes(artifact_path)
         canonical_manifest_path = Path(substrate["canonical_manifest"])
-        canonical_manifest_bytes = canonical_manifest_path.read_bytes()
+        canonical_manifest_bytes = canonical_file_bytes(canonical_manifest_path)
         canonical_manifest = json.loads(canonical_manifest_bytes.decode("utf-8"))
 
         require(
@@ -141,7 +150,7 @@ def main() -> int:
                 f"{heldout_path}: substrate field {key} disagrees with canonical manifest",
             )
         require(
-            canonical_manifest.get("artifact") == str(artifact_path),
+            canonical_manifest.get("artifact") == artifact_path.as_posix(),
             f"{heldout_path}: canonical manifest points to a different artifact",
         )
 

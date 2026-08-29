@@ -23,6 +23,13 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+
+
+def canonical_file_bytes(path: Path) -> bytes:
+    """Read repository text in the LF form used by committed Git blobs."""
+    return path.read_bytes().replace(b"\r\n", b"\n")
+
+
 def git_blob_sha1(data: bytes) -> str:
     header = f"blob {len(data)}\0".encode("ascii")
     return hashlib.sha1(header + data).hexdigest()
@@ -68,7 +75,7 @@ def main() -> int:
         for record in selected
     ).encode("utf-8")
     artifact_sha256 = sha256_bytes(payload)
-    corpus_sha256 = sha256_bytes(CORPUS.read_bytes())
+    corpus_sha256 = sha256_bytes(canonical_file_bytes(CORPUS))
 
     manifest = {
         "schema_version": 1,
@@ -78,7 +85,7 @@ def main() -> int:
         "first_id": EXPECTED_IDS[0],
         "last_id": EXPECTED_IDS[-1],
         "verse_count": len(selected),
-        "artifact": str(OUT_RECORDS),
+        "artifact": OUT_RECORDS.as_posix(),
         "artifact_sha256": artifact_sha256,
         "all_text_kjv_sha256_verified": True,
     }
@@ -94,7 +101,7 @@ def main() -> int:
             f"derivation: manifest={existing_target}, derived={artifact_sha256}"
         )
 
-    old_records = OUT_RECORDS.read_bytes()
+    old_records = canonical_file_bytes(OUT_RECORDS)
     old_blob_sha = git_blob_sha1(old_records)
 
     OUT_RECORDS.write_bytes(payload)
